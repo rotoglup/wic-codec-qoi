@@ -49,9 +49,7 @@ public:
     QoiImage( );
     virtual ~QoiImage( );
 
-    bool Read( const std::wstring& filename );
     bool Read( IStream* pStream );
-    bool Save( const std::wstring& filename ) const;
     bool Save( IStream* pStream ) const;
 
     bool SetImage( const UINT width,

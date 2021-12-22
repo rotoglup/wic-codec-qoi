@@ -51,20 +51,6 @@ QoiImage::~QoiImage( )
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-bool QoiImage::Read( const wstring& filename )
-{
-    CComPtr<IStream> pIStream;
-    HRESULT hr = SHCreateStreamOnFileEx( filename.c_str( ), STGM_READ, FILE_ATTRIBUTE_NORMAL, FALSE, NULL, &pIStream );
-    if ( ( FAILED( hr ) ) || ( pIStream == nullptr ) )
-    {
-        return false;
-    }
-
-    return Read( pIStream );
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 bool QoiImage::Read( IStream* pStream )
 {
     if ( pStream == nullptr ) return false;
@@ -96,20 +82,6 @@ bool QoiImage::Read( IStream* pStream )
     if ( !stream.ReadBytes( m_bytes.data( ), size ) ) return false;
 
     return true;
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-bool QoiImage::Save( const std::wstring& filename ) const
-{
-    CComPtr<IStream> pIStream;
-    HRESULT hr = SHCreateStreamOnFileEx( filename.c_str( ), STGM_WRITE | STGM_CREATE, FILE_ATTRIBUTE_NORMAL, TRUE, NULL, &pIStream );
-    if ( ( FAILED( hr ) ) || ( pIStream == nullptr ) )
-    {
-        return false;
-    }
-
-    return Save( pIStream );
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
