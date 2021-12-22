@@ -41,6 +41,8 @@
 #include "WicBitmapEncoder.h"
 #include "PropertyStore.h"
 
+extern void DEBUG_TRACE(const char *msg);           // WIP(nll)
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Object and server locks counters
@@ -159,6 +161,7 @@ typedef void (STDAPICALLTYPE *SHChangeNotifyFunc)(LONG wEventId, UINT uFlags, LP
 
 static HRESULT RegisterServer( )
 {
+    DEBUG_TRACE("RegisterServer\n");
     // The installer will create the needed registry entries...
 
     // Updating the Thumbnail Cache When Installing Your Codec
@@ -172,6 +175,7 @@ static HRESULT RegisterServer( )
 
 STDAPI DllRegisterServer( )
 {
+    DEBUG_TRACE("DllRegisterServer\n");
     RegisterServer( );
 
     return S_OK;
@@ -181,6 +185,7 @@ STDAPI DllRegisterServer( )
 
 STDAPI DllUnregisterServer( )
 {
+    DEBUG_TRACE("DllUnregisterServer\n");
     return S_OK;
 }
 
@@ -188,6 +193,7 @@ STDAPI DllUnregisterServer( )
 
 STDAPI DllGetClassObject( REFCLSID clsid, REFIID iid, LPVOID *ppv )
 {
+    DEBUG_TRACE("DllGetClassObject\n");
     if ( ppv == nullptr )
     {
         return E_INVALIDARG;
@@ -202,14 +208,17 @@ STDAPI DllGetClassObject( REFCLSID clsid, REFIID iid, LPVOID *ppv )
 
     if ( IsEqualGUID( clsid, CLSID_WicBitmapDecoder ) )
     {
+        DEBUG_TRACE("    WicBitmapDecoder\n");
         *ppv = (LPVOID)(new (std::nothrow) MyClassFactory( CreateComObject<WicBitmapDecoder> ) );
     }
     else if ( IsEqualGUID( clsid, CLSID_WicBitmapEncoder ) )
     {
+        DEBUG_TRACE("    WicBitmapEncoder\n");
         *ppv = (LPVOID)(new (std::nothrow) MyClassFactory( CreateComObject<WicBitmapEncoder> ) );
     }
     else if ( IsEqualGUID( clsid, CLSID_PropertyStore ) )
     {
+        DEBUG_TRACE("    PropertyStore\n");
         *ppv = (LPVOID)(new (std::nothrow) MyClassFactory( CreateComObject<PropertyStore> ) );
     }
     else
@@ -229,12 +238,15 @@ STDAPI DllGetClassObject( REFCLSID clsid, REFIID iid, LPVOID *ppv )
 
 STDAPI DllCanUnloadNow( )
 {
+    DEBUG_TRACE("DllCanUnloadNow\n");
     if ( MAIN_nObjects == 0 && MAIN_nServerLocks == 0 )
     {
+        DEBUG_TRACE("    S_OK\n");
         return S_OK;
     }
     else
     {
+        DEBUG_TRACE("    S_FALSE\n");
         return S_FALSE;
     }
 }

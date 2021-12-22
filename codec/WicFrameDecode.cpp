@@ -28,6 +28,8 @@
 
 using namespace std;
 
+extern void DEBUG_TRACE(const char *msg);           // WIP(nll)
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 WicFrameDecode::WicFrameDecode( QoiImage* pImage ) :
@@ -37,6 +39,7 @@ WicFrameDecode::WicFrameDecode( QoiImage* pImage ) :
     m_pixelFormat( QoiPixelFormat::Unknown ),
     m_imageData( NULL )
 {
+    DEBUG_TRACE("WicFrameDecode::WicFrameDecode\n");
     m_width = m_pImage->GetWidth( );
     m_height = m_pImage->GetHeight( );
     m_pixelFormat = m_pImage->GetPixelFormat( );
@@ -47,23 +50,27 @@ WicFrameDecode::WicFrameDecode( QoiImage* pImage ) :
 
 WicFrameDecode::~WicFrameDecode( )
 {
+    DEBUG_TRACE("WicFrameDecode::~WicFrameDecode\n");
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 HRESULT WicFrameDecode::CreateFromStream( IStream* pIStream, ComPtr<WicFrameDecode>* ppFrame, UINT index )
 {
+    DEBUG_TRACE("WicFrameDecode::CreateFromStream\n");
     if ( pIStream == nullptr )
     {
         return E_INVALIDARG;
     }
 
-    std::auto_ptr<QoiImage> pImage( new QoiImage( ) );
+    DEBUG_TRACE("    std::auto_ptr<QoiImage> pImage( new QoiImage )\n");
+    std::auto_ptr<QoiImage> pImage( new QoiImage );
     if ( pImage.get( ) == nullptr )
     {
         return E_OUTOFMEMORY;
     }
 
+    DEBUG_TRACE("    pImage->Read( pIStream )\n");
     if ( !pImage->Read( pIStream ) )
     {
         return E_FAIL;

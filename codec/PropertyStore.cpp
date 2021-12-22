@@ -36,11 +36,14 @@
 
 using namespace std;
 
+extern void DEBUG_TRACE(const char *msg);           // WIP(nll)
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 PropertyStore::PropertyStore( ) :
     m_referenceCount( 1 )
 {
+    DEBUG_TRACE("PropertyStore::PropertyStore\n");
     InterlockedIncrement( &MAIN_nObjects );
 }
 
@@ -48,6 +51,7 @@ PropertyStore::PropertyStore( ) :
 
 PropertyStore::~PropertyStore( )
 {
+    DEBUG_TRACE("PropertyStore::~PropertyStore\n");
     InterlockedDecrement( &MAIN_nObjects );
 }
 
@@ -96,6 +100,7 @@ IFACEMETHODIMP_(ULONG) PropertyStore::Release( )
 // Initializes the property handler with a stream.
 IFACEMETHODIMP PropertyStore::Initialize( IStream *pStream, DWORD /*grfMode*/ )
 {
+    DEBUG_TRACE("PropertyStore::Initialize\n");
     if ( pStream == nullptr )
     {
         return E_INVALIDARG;
@@ -179,6 +184,7 @@ IFACEMETHODIMP PropertyStore::GetValue( REFPROPERTYKEY key, PROPVARIANT* pValue 
     // Windows Properties
     // https://msdn.microsoft.com/en-us/library/windows/desktop/dd561977%28v=vs.85%29.aspx
 
+    DEBUG_TRACE("PropertyStore::GetValue\n");
     if ( pValue == nullptr )
     {
         return E_POINTER;

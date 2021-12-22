@@ -30,11 +30,19 @@
 
 using namespace std;
 
+void DEBUG_TRACE(const char *msg)           // WIP(nll)
+{
+    FILE* f = fopen("C:\\temp\\WIC_debug.txt", "a");
+    fprintf(f, msg);
+    fclose(f);
+}
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 WicBitmapDecoder::WicBitmapDecoder( ) :
     m_index( 0 )
 {
+    DEBUG_TRACE("WicBitmapDecoder::WicBitmapDecoder\n");
     InitializeCriticalSection( &m_criticalSection );
 }
 
@@ -42,6 +50,7 @@ WicBitmapDecoder::WicBitmapDecoder( ) :
 
 WicBitmapDecoder::~WicBitmapDecoder( )
 {
+    DEBUG_TRACE("WicBitmapDecoder::~WicBitmapDecoder\n");
     DeleteCriticalSection( &m_criticalSection );
 }
 
@@ -57,11 +66,13 @@ HRESULT WicBitmapDecoder::QueryInterface( REFIID riid, void** ppObject )
 
     *ppObject = nullptr;
 
+    DEBUG_TRACE("WicBitmapDecoder::QueryInterface\n");
     if ( !IsEqualGUID( riid, IID_IUnknown ) && !IsEqualGUID( riid, IID_IWICBitmapDecoder ) )
     {
         return E_NOINTERFACE;
     }
 
+    DEBUG_TRACE("    IID_IWICBitmapDecoder\n");
     this->AddRef( );
     *ppObject = static_cast<IWICBitmapDecoder*>( this );
     return S_OK;
@@ -87,6 +98,7 @@ HRESULT WicBitmapDecoder::QueryCapability( IStream* pIStream, DWORD* pCapability
 
 HRESULT WicBitmapDecoder::Initialize( IStream* pIStream, WICDecodeOptions /*cacheOptions*/ )
 {
+    DEBUG_TRACE("WicBitmapDecoder::Initialize\n");
     if ( pIStream == nullptr )
     {
         return E_INVALIDARG;
@@ -190,6 +202,7 @@ HRESULT WicBitmapDecoder::GetFrameCount( UINT* pCount )
 
 HRESULT WicBitmapDecoder::GetFrame( UINT index, IWICBitmapFrameDecode** ppIBitmapFrame )
 {
+    DEBUG_TRACE("WicBitmapDecoder::GetFrame\n");
     if ( ppIBitmapFrame == nullptr )
     {
         return E_INVALIDARG;
