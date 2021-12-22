@@ -7,7 +7,7 @@
 #define FriendlyName  "Quite OK Image"
 #define FileExtension ".qoi"
 #define MimeType      "image/qoi"
-#define ContainerNameID "QoiImageFile"
+#define ProgID        "qoiimagefile"
 
 #define DecoderCLSID         "A5FEB271-E153-4310-A1CE-50D979463836"
 #define EncoderCLSID         "3A04401D-1273-4560-8CF8-864D881AA5AD"
@@ -71,10 +71,11 @@ Root: HKCR; Subkey: "CLSID\{{{#DecoderCLSID}}"; ValueType: dword;  ValueName: "S
 Root: HKCR; Subkey: "CLSID\{{{#DecoderCLSID}}"; ValueType: dword;  ValueName: "SupportLossless";   ValueData: "1";
 Root: HKCR; Subkey: "CLSID\{{{#DecoderCLSID}}"; ValueType: dword;  ValueName: "SupportMultiframe"; ValueData: "0";
 
-; GUID_WICPixelFormat8bppGray
-Root: HKCR; Subkey: "CLSID\{{{#DecoderCLSID}}\Formats\{{6FDDC324-4E03-4BFE-B185-3D77768DC908}";
+; OLD ; ; GUID_WICPixelFormat8bppGray
+; OLD ; Root: HKCR; Subkey: "CLSID\{{{#DecoderCLSID}}\Formats\{{6FDDC324-4E03-4BFE-B185-3D77768DC908}";
 ; GUID_WICPixelFormat24bppRGB
 Root: HKCR; Subkey: "CLSID\{{{#DecoderCLSID}}\Formats\{{6FDDC324-4E03-4BFE-B185-3D77768DC90D}";
+; GUID_WICPixelFormat32bppRGBA // TODO(nll)
 
 Root: HKCR; Subkey: "CLSID\{{{#DecoderCLSID}}\InprocServer32";
 Root: HKCR; Subkey: "CLSID\{{{#DecoderCLSID}}\InprocServer32"; ValueType: string; ValueName: ""; ValueData: "{app}\WicCodec.dll";
@@ -100,10 +101,11 @@ Root: HKCR; Subkey: "CLSID\{{{#EncoderCLSID}}"; ValueType: dword;  ValueName: "S
 Root: HKCR; Subkey: "CLSID\{{{#EncoderCLSID}}"; ValueType: dword;  ValueName: "SupportLossless";   ValueData: "1";
 Root: HKCR; Subkey: "CLSID\{{{#EncoderCLSID}}"; ValueType: dword;  ValueName: "SupportMultiframe"; ValueData: "0";
 
-; GUID_WICPixelFormat8bppGray
-Root: HKCR; Subkey: "CLSID\{{{#EncoderCLSID}}\Formats\{{6FDDC324-4E03-4BFE-B185-3D77768DC908}";
+; OLD ; ; GUID_WICPixelFormat8bppGray
+; OLD ; Root: HKCR; Subkey: "CLSID\{{{#DecoderCLSID}}\Formats\{{6FDDC324-4E03-4BFE-B185-3D77768DC908}";
 ; GUID_WICPixelFormat24bppRGB
-Root: HKCR; Subkey: "CLSID\{{{#EncoderCLSID}}\Formats\{{6FDDC324-4E03-4BFE-B185-3D77768DC90D}";
+Root: HKCR; Subkey: "CLSID\{{{#DecoderCLSID}}\Formats\{{6FDDC324-4E03-4BFE-B185-3D77768DC90D}";
+; GUID_WICPixelFormat32bppRGBA // TODO(nll)
 
 Root: HKCR; Subkey: "CLSID\{{{#EncoderCLSID}}\InprocServer32";
 Root: HKCR; Subkey: "CLSID\{{{#EncoderCLSID}}\InprocServer32"; ValueType: string; ValueName: ""; ValueData: "{app}\WicCodec.dll";
@@ -188,13 +190,14 @@ Root: HKCR; Subkey: "CLSID\{{{#PropertyHandlerCLSID}}\InprocServer32"; ValueType
 Root: HKCR; Subkey: "CLSID\{{{#PropertyHandlerCLSID}}\InprocServer32"; ValueType: string; ValueName: "ThreadingModel"; ValueData: "Apartment";
 
 ; RAW
+;     https://docs.microsoft.com/en-us/windows/win32/wic/-wic-integrationregentries
 Root: HKCR; Subkey: "{#FileExtension}"; Flags: uninsdeletekeyifempty
-Root: HKCR; Subkey: "{#FileExtension}"; ValueType: string; ValueName: ""; ValueData: "{#ContainerNameID}"; Flags: uninsdeletevalue
+Root: HKCR; Subkey: "{#FileExtension}"; ValueType: string; ValueName: ""; ValueData: "{#ProgID}"; Flags: uninsdeletevalue
 Root: HKCR; Subkey: "{#FileExtension}"; ValueType: string; ValueName: "Content Type"; ValueData: "{#MimeType}"; Flags: uninsdeletevalue
 Root: HKCR; Subkey: "{#FileExtension}"; ValueType: string; ValueName: "PerceivedType"; ValueData: "image"; Flags: uninsdeletevalue
 Root: HKCR; Subkey: "{#FileExtension}\OpenWithList\PhotoViewer.dll"; Flags: uninsdeletekeyifempty
 Root: HKCR; Subkey: "{#FileExtension}\OpenWithProgids"; Flags: uninsdeletekeyifempty
-Root: HKCR; Subkey: "{#FileExtension}\OpenWithProgids"; ValueType: string; ValueName: "{#ContainerNameID}"; ValueData: ""; Flags: uninsdeletevalue
+Root: HKCR; Subkey: "{#FileExtension}\OpenWithProgids"; ValueType: string; ValueName: "{#ProgID}"; ValueData: ""; Flags: uninsdeletevalue
 Root: HKCR; Subkey: "{#FileExtension}\shellex\ContextMenuHandlers\ShellImagePreview"; Flags: uninsdeletekeyifempty
 Root: HKCR; Subkey: "{#FileExtension}\shellex\ContextMenuHandlers\ShellImagePreview"; ValueType: string; ValueName: ""; ValueData: "{{FFE2A43C-56B9-4bf5-9A79-CC6D4285608A}"; Flags: uninsdeletevalue
 Root: HKCR; Subkey: "{#FileExtension}\shellex\{{e357fccd-a995-4576-b01f-234630154e96}"; Flags: uninsdeletekeyifempty
@@ -203,24 +206,24 @@ Root: HKCR; Subkey: "{#FileExtension}\shellex\{{e357fccd-a995-4576-b01f-23463015
 ; Container Format
 ;     https://msdn.microsoft.com/en-us/library/windows/desktop/cc144133%28v=vs.85%29.aspx
 ;     https://msdn.microsoft.com/en-us/library/windows/desktop/dd561977%28v=vs.85%29.aspx
-Root: HKCR; Subkey: "{#ContainerNameID}"; Flags: uninsdeletekey
-Root: HKCR; Subkey: "{#ContainerNameID}"; ValueType: string; ValueName: ""; ValueData: "{#FriendlyName} WIC Image"
-Root: HKCR; Subkey: "{#ContainerNameID}"; ValueType: string; ValueName: "FullDetails"; ValueData: "prop:System.Image.HorizontalSize;System.Image.VerticalSize;System.Image.BitDepth;System.DateModified;System.DateCreated";
-Root: HKCR; Subkey: "{#ContainerNameID}"; ValueType: string; ValueName: "PreviewDetails"; ValueData: "prop:System.Image.HorizontalSize;System.Image.VerticalSize;System.Image.BitDepth;System.Size;System.DateModified;System.DateCreated";
-Root: HKCR; Subkey: "{#ContainerNameID}"; ValueType: string; ValueName: "TileInfo"; ValueData: "prop:System.Image.Dimensions;System.Size";
-Root: HKCR; Subkey: "{#ContainerNameID}"; ValueType: string; ValueName: "InfoTip"; ValueData: "prop:System.Image.Dimensions;System.Image.BitDepth;System.Size;System.DateModified;System.DateCreated";
+Root: HKCR; Subkey: "{#ProgID}"; Flags: uninsdeletekey
+Root: HKCR; Subkey: "{#ProgID}"; ValueType: string; ValueName: ""; ValueData: "{#FriendlyName} WIC Image"
+Root: HKCR; Subkey: "{#ProgID}"; ValueType: string; ValueName: "FullDetails"; ValueData: "prop:System.Image.HorizontalSize;System.Image.VerticalSize;System.Image.BitDepth;System.DateModified;System.DateCreated";
+Root: HKCR; Subkey: "{#ProgID}"; ValueType: string; ValueName: "PreviewDetails"; ValueData: "prop:System.Image.HorizontalSize;System.Image.VerticalSize;System.Image.BitDepth;System.Size;System.DateModified;System.DateCreated";
+Root: HKCR; Subkey: "{#ProgID}"; ValueType: string; ValueName: "TileInfo"; ValueData: "prop:System.Image.Dimensions;System.Size";
+Root: HKCR; Subkey: "{#ProgID}"; ValueType: string; ValueName: "InfoTip"; ValueData: "prop:System.Image.Dimensions;System.Image.BitDepth;System.Size;System.DateModified;System.DateCreated";
 
-Root: HKCR; Subkey: "{#ContainerNameID}\shell\open";
-Root: HKCR; Subkey: "{#ContainerNameID}\shell\open"; ValueType: expandsz; ValueName: "MuiVerb"; ValueData: "@%ProgramFiles%\Windows Photo Viewer\photoviewer.dll,-3043"
+Root: HKCR; Subkey: "{#ProgID}\shell\open";
+Root: HKCR; Subkey: "{#ProgID}\shell\open"; ValueType: expandsz; ValueName: "MuiVerb"; ValueData: "@%ProgramFiles%\Windows Photo Viewer\photoviewer.dll,-3043"
 
-Root: HKCR; Subkey: "{#ContainerNameID}\shell\open\command";
-Root: HKCR; Subkey: "{#ContainerNameID}\shell\open\command"; ValueType: expandsz; ValueName: ""; ValueData: "%SystemRoot%\System32\rundll32.exe ""%ProgramFiles%\Windows Photo Viewer\PhotoViewer.dll"", ImageView_Fullscreen %1"
+Root: HKCR; Subkey: "{#ProgID}\shell\open\command";
+Root: HKCR; Subkey: "{#ProgID}\shell\open\command"; ValueType: expandsz; ValueName: ""; ValueData: "%SystemRoot%\System32\rundll32.exe ""%ProgramFiles%\Windows Photo Viewer\PhotoViewer.dll"", ImageView_Fullscreen %1"
 
-Root: HKCR; Subkey: "{#ContainerNameID}\shell\open\DropTarget";
-Root: HKCR; Subkey: "{#ContainerNameID}\shell\open\DropTarget"; ValueType: string; ValueName: "Clsid"; ValueData: "{{FFE2A43C-56B9-4bf5-9A79-CC6D4285608A}";
+Root: HKCR; Subkey: "{#ProgID}\shell\open\DropTarget";
+Root: HKCR; Subkey: "{#ProgID}\shell\open\DropTarget"; ValueType: string; ValueName: "Clsid"; ValueData: "{{FFE2A43C-56B9-4bf5-9A79-CC6D4285608A}";
 
-Root: HKCR; Subkey: "{#ContainerNameID}\shellex\ContextMenuHandlers\{{649EAC06-3FB9-42C9-BA69-88BC473130F5}";
-Root: HKCR; Subkey: "{#ContainerNameID}\shellex\ContextMenuHandlers\{{649EAC06-3FB9-42C9-BA69-88BC473130F5}"; ValueType: string; ValueName: ""; ValueData: "ContextMenuHandler";
+Root: HKCR; Subkey: "{#ProgID}\shellex\ContextMenuHandlers\{{649EAC06-3FB9-42C9-BA69-88BC473130F5}";
+Root: HKCR; Subkey: "{#ProgID}\shellex\ContextMenuHandlers\{{649EAC06-3FB9-42C9-BA69-88BC473130F5}"; ValueType: string; ValueName: ""; ValueData: "ContextMenuHandler";
 
 ; Windows shell integration
 ;     https://msdn.microsoft.com/en-us/library/windows/desktop/cc144110%28v=vs.85%29.aspx
