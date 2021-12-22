@@ -2,7 +2,7 @@
 //
 //    MIT License
 //
-//    Copyright(c) 2017 René Slijkhuis
+//    Copyright(c) 2017 Renï¿½ Slijkhuis
 //
 //    Permission is hereby granted, free of charge, to any person obtaining a copy
 //    of this software and associated documentation files (the "Software"), to deal
@@ -32,7 +32,7 @@
 #include <propsys.h>
 #include <propkey.h>
 
-#include "LisaImage.h"
+#include "QoiImage.h"
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
@@ -68,7 +68,7 @@ public:
 
 private:
     long m_referenceCount;
-    Wic::ImageFormat::Lisa::LisaImage m_image;
+    QoiImage m_image;
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

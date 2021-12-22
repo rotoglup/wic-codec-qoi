@@ -2,7 +2,7 @@
 //
 //    MIT License
 //
-//    Copyright(c) 2017 René Slijkhuis
+//    Copyright(c) 2017 Renï¿½ Slijkhuis
 //
 //    Permission is hereby granted, free of charge, to any person obtaining a copy
 //    of this software and associated documentation files (the "Software"), to deal
@@ -26,7 +26,7 @@
 
 #include <atlbase.h>
 
-#include "LisaImage.h"
+#include "QoiImage.h"
 #include "StreamReader.h"
 #include "StreamWriter.h"
 
@@ -34,30 +34,24 @@ using namespace std;
 using namespace Wic::ImageFormat::Utilities;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-namespace Wic {
-namespace ImageFormat {
-namespace Lisa {
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma region Public methods
 
-LisaImage::LisaImage( ) :
+QoiImage::QoiImage( ) :
     m_width( 0 ),
     m_height( 0 ),
-    m_pixelFormat( PixelFormat::Unknown )
+    m_pixelFormat( QoiPixelFormat::Unknown )
 {
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-LisaImage::~LisaImage( )
+QoiImage::~QoiImage( )
 {
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-bool LisaImage::Read( const wstring& filename )
+bool QoiImage::Read( const wstring& filename )
 {
     CComPtr<IStream> pIStream;
     HRESULT hr = SHCreateStreamOnFileEx( filename.c_str( ), STGM_READ, FILE_ATTRIBUTE_NORMAL, FALSE, NULL, &pIStream );
@@ -71,7 +65,7 @@ bool LisaImage::Read( const wstring& filename )
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-bool LisaImage::Read( IStream* pStream )
+bool QoiImage::Read( IStream* pStream )
 {
     if ( pStream == nullptr ) return false;
 
@@ -89,7 +83,7 @@ bool LisaImage::Read( IStream* pStream )
     UINT value;
     if ( !stream.ReadUInt32( value ) ) return false;
     m_pixelFormat = ConvertPixelFormat( value );
-    if ( m_pixelFormat == PixelFormat::Unknown ) return false;
+    if ( m_pixelFormat == QoiPixelFormat::Unknown ) return false;
 
     UINT offset = 0;
     if ( !stream.ReadUInt32( offset ) ) return false;
@@ -106,7 +100,7 @@ bool LisaImage::Read( IStream* pStream )
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-bool LisaImage::Save( const std::wstring& filename ) const
+bool QoiImage::Save( const std::wstring& filename ) const
 {
     CComPtr<IStream> pIStream;
     HRESULT hr = SHCreateStreamOnFileEx( filename.c_str( ), STGM_WRITE | STGM_CREATE, FILE_ATTRIBUTE_NORMAL, TRUE, NULL, &pIStream );
@@ -120,14 +114,14 @@ bool LisaImage::Save( const std::wstring& filename ) const
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-bool LisaImage::Save( IStream* pStream ) const
+bool QoiImage::Save( IStream* pStream ) const
 {
     if ( pStream == nullptr )
     {
         return false;
     }
 
-    if ( ( m_width == 0 ) || ( m_height == 0 ) || ( m_pixelFormat == PixelFormat::Unknown ) )
+    if ( ( m_width == 0 ) || ( m_height == 0 ) || ( m_pixelFormat == QoiPixelFormat::Unknown ) )
     {
         return false;
     }
@@ -155,12 +149,12 @@ bool LisaImage::Save( IStream* pStream ) const
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-bool LisaImage::SetImage( const UINT width,
+bool QoiImage::SetImage( const UINT width,
                           const UINT height,
-                          const PixelFormat pixelFormat,
+                          const QoiPixelFormat pixelFormat,
                           const vector<BYTE>& bytes )
 {
-    if ( ( width == 0 ) || ( height == 0 ) || ( pixelFormat == PixelFormat::Unknown ) )
+    if ( ( width == 0 ) || ( height == 0 ) || ( pixelFormat == QoiPixelFormat::Unknown ) )
     {
         return false;
     }
@@ -180,95 +174,90 @@ bool LisaImage::SetImage( const UINT width,
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void LisaImage::GetBytes( vector<BYTE>& bytes ) const
+void QoiImage::GetBytes( vector<BYTE>& bytes ) const
 {
     bytes = m_bytes;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-UINT LisaImage::GetWidth( ) const
+UINT QoiImage::GetWidth( ) const
 {
     return m_width;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-UINT LisaImage::GetHeight( ) const
+UINT QoiImage::GetHeight( ) const
 {
     return m_height;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-PixelFormat LisaImage::GetPixelFormat( ) const
+QoiPixelFormat QoiImage::GetPixelFormat( ) const
 {
     return m_pixelFormat;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-UINT LisaImage::GetBytesPerPixel( const PixelFormat pixelFormat )
+UINT QoiImage::GetBytesPerPixel( const QoiPixelFormat pixelFormat )
 {
-    if ( pixelFormat == PixelFormat::Unknown )
+    if ( pixelFormat == QoiPixelFormat::Unknown )
     {
         return 0;
     }
-    else if ( pixelFormat == PixelFormat::UInt8 )
+    else if ( pixelFormat == QoiPixelFormat::UInt8 )
     {
         return 1;
     }
-    else if ( pixelFormat == PixelFormat::RGB24 )
+    else if ( pixelFormat == QoiPixelFormat::RGB24 )
     {
         return 3;
     }
 
-    throw invalid_argument( "Unknown PixelFormat" );
+    throw invalid_argument( "Unknown QoiPixelFormat" );
 }
 
 #pragma endregion
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma region Private methods
 
-PixelFormat LisaImage::ConvertPixelFormat( const UINT value ) const
+QoiPixelFormat QoiImage::ConvertPixelFormat( const UINT value ) const
 {
     if ( value == 0 )
     {
-        return PixelFormat::UInt8;
+        return QoiPixelFormat::UInt8;
     }
     else if ( value == 1 )
     {
-        return PixelFormat::RGB24;
+        return QoiPixelFormat::RGB24;
     }
 
-    return PixelFormat::Unknown;
+    return QoiPixelFormat::Unknown;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-UINT LisaImage::ConvertPixelFormat( const PixelFormat pixelFormat ) const
+UINT QoiImage::ConvertPixelFormat( const QoiPixelFormat pixelFormat ) const
 {
-    if ( pixelFormat == PixelFormat::Unknown )
+    if ( pixelFormat == QoiPixelFormat::Unknown )
     {
         throw invalid_argument( "Invalid argument" );
     }
-    else if ( pixelFormat == PixelFormat::UInt8 )
+    else if ( pixelFormat == QoiPixelFormat::UInt8 )
     {
         return 0;
     }
-    else if ( pixelFormat == PixelFormat::RGB24 )
+    else if ( pixelFormat == QoiPixelFormat::RGB24 )
     {
         return 1;
     }
 
-    throw invalid_argument( "Unknown PixelFormat" );
+    throw invalid_argument( "Unknown QoiPixelFormat" );
 }
 
 #pragma endregion
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-} // namespace Lisa
-} // namespace ImageFormat
-} // namespace Wic
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

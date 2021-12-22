@@ -2,7 +2,7 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="LisaImage.cpp">
+    <ClCompile Include="QoiImage.cpp">
       <Filter>FileFormat</Filter>
     </ClCompile>
     <ClCompile Include="StreamReader.cpp">
@@ -29,7 +29,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h" />
-    <ClInclude Include="LisaImage.h">
+    <ClInclude Include="QoiImage.h">
       <Filter>FileFormat</Filter>
     </ClInclude>
     <ClInclude Include="StreamReader.h">

@@ -22,7 +22,7 @@
     <ProjectGuid>{C8D77F9F-6464-44B2-A790-2BCA8580C509}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>WicCodec</RootNamespace>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -35,21 +35,21 @@
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v120_xp</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v120_xp</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v120_xp</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -172,7 +172,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="LisaImage.cpp" />
+    <ClCompile Include="QoiImage.cpp" />
     <ClCompile Include="PropertyStore.cpp" />
     <ClCompile Include="StreamReader.cpp" />
     <ClCompile Include="StreamWriter.cpp" />
@@ -183,7 +183,7 @@
     <ClCompile Include="WicFrameEncode.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="LisaImage.h" />
+    <ClInclude Include="QoiImage.h" />
     <ClInclude Include="PropertyStore.h" />
     <ClInclude Include="StreamReader.h" />
     <ClInclude Include="StreamWriter.h" />

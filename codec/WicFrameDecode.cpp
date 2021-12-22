@@ -27,20 +27,19 @@
 #include "WicFrameDecode.h"
 
 using namespace std;
-using namespace Wic::ImageFormat::Lisa;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-WicFrameDecode::WicFrameDecode( LisaImage* pLisaImage ) :
-    m_pLisaImage( pLisaImage ),
+WicFrameDecode::WicFrameDecode( QoiImage* pImage ) :
+    m_pImage( pImage ),
     m_width( 0 ),
     m_height( 0 ),
-    m_pixelFormat( PixelFormat::Unknown )
+    m_pixelFormat( QoiPixelFormat::Unknown )
 {
-    m_width = m_pLisaImage->GetWidth( );
-    m_height = m_pLisaImage->GetHeight( );
-    m_pixelFormat = m_pLisaImage->GetPixelFormat( );
-    m_pLisaImage->GetBytes( m_imageData );
+    m_width = m_pImage->GetWidth( );
+    m_height = m_pImage->GetHeight( );
+    m_pixelFormat = m_pImage->GetPixelFormat( );
+    m_pImage->GetBytes( m_imageData );
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -58,13 +57,13 @@ HRESULT WicFrameDecode::CreateFromStream( IStream* pIStream, ComPtr<WicFrameDeco
         return E_INVALIDARG;
     }
 
-    std::auto_ptr<LisaImage> pLisaImage( new LisaImage( ) );
-    if ( pLisaImage.get( ) == nullptr )
+    std::auto_ptr<QoiImage> pImage( new QoiImage( ) );
+    if ( pImage.get( ) == nullptr )
     {
         return E_OUTOFMEMORY;
     }
 
-    if ( !pLisaImage->Read( pIStream ) )
+    if ( !pImage->Read( pIStream ) )
     {
         return E_FAIL;
     }
@@ -72,7 +71,7 @@ HRESULT WicFrameDecode::CreateFromStream( IStream* pIStream, ComPtr<WicFrameDeco
     ComPtr<WicFrameDecode> output;
     (*ppFrame).reset( nullptr );
 
-    output.reset( new WicFrameDecode( pLisaImage.release( ) ) );
+    output.reset( new WicFrameDecode( pImage.release( ) ) );
     if ( output.Ptr( ) == nullptr )
     {
         return E_OUTOFMEMORY;
@@ -149,11 +148,11 @@ HRESULT WicFrameDecode::GetPixelFormat( WICPixelFormatGUID* pPixelFormat )
         return E_INVALIDARG;
     }
 
-    if ( m_pixelFormat == PixelFormat::UInt8 )
+    if ( m_pixelFormat == QoiPixelFormat::UInt8 )
     {
         *pPixelFormat = GUID_WICPixelFormat8bppGray;
     }
-    else if ( m_pixelFormat == PixelFormat::RGB24 )
+    else if ( m_pixelFormat == QoiPixelFormat::RGB24 )
     {
         *pPixelFormat = GUID_WICPixelFormat24bppRGB;
     }
@@ -214,7 +213,7 @@ HRESULT WicFrameDecode::CopyPixels( const WICRect* pRc, UINT stride, UINT buffer
     }
 
     int bytesPerPixel = 1;
-    if ( m_pixelFormat == PixelFormat::RGB24 ) bytesPerPixel = 3;
+    if ( m_pixelFormat == QoiPixelFormat::RGB24 ) bytesPerPixel = 3;
 
     int x = rect.X;
     int strideSrc  = m_width * bytesPerPixel;

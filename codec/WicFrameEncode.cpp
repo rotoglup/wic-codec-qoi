@@ -28,14 +28,13 @@
 #include "WicFrameEncode.h"
 
 using namespace std;
-using namespace Wic::ImageFormat::Lisa;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 WicFrameEncode::WicFrameEncode( WicBitmapEncoder* pEncoder ) :
     m_width( 0 ),
     m_height( 0 ),
-    m_pixelFormat( PixelFormat::Unknown ),
+    m_pixelFormat( QoiPixelFormat::Unknown ),
     m_pEncoder( pEncoder )
 {
     m_pEncoder->AddRef( );
@@ -113,11 +112,11 @@ HRESULT WicFrameEncode::SetPixelFormat( WICPixelFormatGUID* pPixelFormat )
 
     if ( *pPixelFormat == GUID_WICPixelFormat8bppGray )
     {
-        m_pixelFormat = PixelFormat::UInt8;
+        m_pixelFormat = QoiPixelFormat::UInt8;
     }
     else if ( *pPixelFormat == GUID_WICPixelFormat24bppRGB )
     {
-        m_pixelFormat = PixelFormat::RGB24;
+        m_pixelFormat = QoiPixelFormat::RGB24;
     }
     else
     {
@@ -136,12 +135,12 @@ HRESULT WicFrameEncode::WritePixels( UINT lineCount, UINT cbStride, UINT cbBuffe
         return E_INVALIDARG;
     }
 
-    if ( ( m_width == 0 ) || ( m_height == 0 ) || ( m_pixelFormat == PixelFormat::Unknown ) )
+    if ( ( m_width == 0 ) || ( m_height == 0 ) || ( m_pixelFormat == QoiPixelFormat::Unknown ) )
     {
         return WINCODEC_ERR_NOTINITIALIZED;
     }
 
-    const UINT strideDestination = m_width * LisaImage::GetBytesPerPixel( m_pixelFormat );
+    const UINT strideDestination = m_width * QoiImage::GetBytesPerPixel( m_pixelFormat );
     const UINT sizeDestination = m_height * strideDestination;
 
     if ( ( m_height != lineCount ) ||
@@ -159,7 +158,7 @@ HRESULT WicFrameEncode::WritePixels( UINT lineCount, UINT cbStride, UINT cbBuffe
         memcpy_s( pBytesDestination, strideDestination, pBytesSource, strideDestination );
     }
 
-    if ( !m_lisaImage.SetImage( m_width, m_height, m_pixelFormat, bytes ) )
+    if ( !m_image.SetImage( m_width, m_height, m_pixelFormat, bytes ) )
     {
         return E_FAIL;
     }
@@ -198,18 +197,18 @@ HRESULT WicFrameEncode::WriteSource( IWICBitmapSource* pIBitmapSource, WICRect* 
 
     if ( pixelFormat == GUID_WICPixelFormat8bppGray )
     {
-        m_pixelFormat = PixelFormat::UInt8;
+        m_pixelFormat = QoiPixelFormat::UInt8;
     }
     else if ( pixelFormat == GUID_WICPixelFormat24bppRGB )
     {
-        m_pixelFormat = PixelFormat::RGB24;
+        m_pixelFormat = QoiPixelFormat::RGB24;
     }
     else
     {
         return WINCODEC_ERR_UNSUPPORTEDPIXELFORMAT;
     }
 
-    UINT bytesPerPixel = LisaImage::GetBytesPerPixel( m_pixelFormat );
+    UINT bytesPerPixel = QoiImage::GetBytesPerPixel( m_pixelFormat );
     UINT stride = m_width * bytesPerPixel;
     UINT size = m_width * m_height * bytesPerPixel;
 
@@ -227,7 +226,7 @@ HRESULT WicFrameEncode::WriteSource( IWICBitmapSource* pIBitmapSource, WICRect* 
 
 HRESULT WicFrameEncode::Commit( void )
 {
-    m_pEncoder->SetFrame( m_lisaImage );
+    m_pEncoder->SetFrame( m_image );
     return S_OK;
 }
 

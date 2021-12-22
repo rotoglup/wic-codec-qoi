@@ -2,7 +2,7 @@
 //
 //    MIT License
 //
-//    Copyright(c) 2017 René Slijkhuis
+//    Copyright(c) 2017 Renï¿½ Slijkhuis
 //
 //    Permission is hereby granted, free of charge, to any person obtaining a copy
 //    of this software and associated documentation files (the "Software"), to deal
@@ -33,10 +33,8 @@
 
 #include "main.h"
 #include "PropertyStore.h"
-#include "LisaImage.h"
 
 using namespace std;
-using namespace Wic::ImageFormat::Lisa;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -207,13 +205,13 @@ IFACEMETHODIMP PropertyStore::GetValue( REFPROPERTYKEY key, PROPVARIANT* pValue 
     else if ( key == PKEY_Image_BitDepth )
     {
         UINT bitDepth = 0;
-        PixelFormat pixelFormat = m_image.GetPixelFormat( );
+        QoiPixelFormat pixelFormat = m_image.GetPixelFormat( );
 
-        if ( pixelFormat == PixelFormat::UInt8 )
+        if ( pixelFormat == QoiPixelFormat::UInt8 )
         {
             bitDepth = 8;
         }
-        else if ( pixelFormat == PixelFormat::RGB24 )
+        else if ( pixelFormat == QoiPixelFormat::RGB24 )
         {
             bitDepth = 24;
         }

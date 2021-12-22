@@ -30,7 +30,7 @@
 #include <wincodec.h>
 
 #include "utils.h"
-#include "LisaImage.h"
+#include "QoiImage.h"
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -65,8 +65,8 @@ private:
     WicBitmapEncoder* m_pEncoder;
     UINT m_width;
     UINT m_height;
-    Wic::ImageFormat::Lisa::PixelFormat m_pixelFormat;
-    Wic::ImageFormat::Lisa::LisaImage m_lisaImage;
+    QoiPixelFormat m_pixelFormat;
+    QoiImage m_image;
 };
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

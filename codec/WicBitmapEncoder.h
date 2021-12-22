@@ -30,7 +30,7 @@
 #include <Wincodecsdk.h>
 
 #include "utils.h"
-#include "LisaImage.h"
+#include "QoiImage.h"
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -44,7 +44,7 @@ public:
     WicBitmapEncoder( );
     virtual ~WicBitmapEncoder( );
 
-    void SetFrame( Wic::ImageFormat::Lisa::LisaImage& image );
+    void SetFrame( QoiImage& image );
 
     // IUnknown
     HRESULT STDMETHODCALLTYPE QueryInterface( REFIID riid, void** ppObject );
@@ -69,7 +69,7 @@ private:
     ComPtr<IWICImagingFactory> m_imagingFactory;
     ComPtr<IWICComponentFactory> m_componentFactory;
     ComPtr<WicFrameEncode> m_frame;
-    Wic::ImageFormat::Lisa::LisaImage m_lisaImage;
+    QoiImage m_image;
     IStream* m_pIStream;
     CRITICAL_SECTION m_criticalSection;
 };

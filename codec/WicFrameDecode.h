@@ -30,14 +30,14 @@
 #include <wincodec.h>
 
 #include "utils.h"
-#include "LisaImage.h"
+#include "QoiImage.h"
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 class WicFrameDecode : public ComObjectBase<IWICBitmapFrameDecode> // Is derived from IWICBitmapSource
 {
 public:
-    WicFrameDecode( Wic::ImageFormat::Lisa::LisaImage* pLisaImage );
+    WicFrameDecode( QoiImage* pImage );
     virtual ~WicFrameDecode( );
 
     static HRESULT CreateFromStream( IStream* pIStream, ComPtr<WicFrameDecode>* ppFrame, UINT index );
@@ -65,11 +65,11 @@ public:
     virtual HRESULT STDMETHODCALLTYPE GetMetadataQueryReader( IWICMetadataQueryReader** ppIMetadataQueryReader );
 
 private:
-    std::unique_ptr<Wic::ImageFormat::Lisa::LisaImage> m_pLisaImage;
+    std::unique_ptr<QoiImage> m_pImage;
     std::vector<BYTE> m_imageData;
     UINT m_width;
     UINT m_height;
-    Wic::ImageFormat::Lisa::PixelFormat m_pixelFormat;
+    QoiPixelFormat m_pixelFormat;
 };
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

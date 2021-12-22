@@ -29,7 +29,6 @@
 #include "uuid.h"
 
 using namespace std;
-using namespace Wic::ImageFormat::Lisa;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -48,9 +47,9 @@ WicBitmapEncoder::~WicBitmapEncoder( )
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void WicBitmapEncoder::SetFrame( LisaImage& image )
+void WicBitmapEncoder::SetFrame( QoiImage& image )
 {
-    m_lisaImage = image;
+    m_image = image;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -213,7 +212,7 @@ HRESULT WicBitmapEncoder::Commit( void )
         return WINCODEC_ERR_FRAMEMISSING;
     }
 
-    return m_lisaImage.Save( m_pIStream ) ? S_OK : E_FAIL;
+    return m_image.Save( m_pIStream ) ? S_OK : E_FAIL;
 }
 
 #pragma endregion

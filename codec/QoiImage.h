@@ -23,19 +23,6 @@
 //    SOFTWARE.
 //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//
-// USAGE INSTRUCTIONS
-//
-// Include:
-//  - LisaImage.h
-//
-// Link:
-//  - gdiplus.lib
-//
-// Namespace:
-//  - Wic::ImageFormat::Lisa
-//
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #pragma once
 
@@ -47,13 +34,7 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-namespace Wic {
-namespace ImageFormat {
-namespace Lisa {
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-enum class PixelFormat
+enum class QoiPixelFormat
 {
     Unknown = 0,
     UInt8,
@@ -62,11 +43,11 @@ enum class PixelFormat
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-class LisaImage
+class QoiImage
 {
 public:
-    LisaImage( );
-    virtual ~LisaImage( );
+    QoiImage( );
+    virtual ~QoiImage( );
 
     bool Read( const std::wstring& filename );
     bool Read( IStream* pStream );
@@ -75,29 +56,21 @@ public:
 
     bool SetImage( const UINT width,
                    const UINT height,
-                   const PixelFormat pixelFormat,
+                   const QoiPixelFormat pixelFormat,
                    const std::vector<BYTE>& bytes );
 
     void GetBytes( std::vector<BYTE>& bytes ) const;
     UINT GetWidth( ) const;
     UINT GetHeight( ) const;
-    PixelFormat GetPixelFormat( ) const;
-    static UINT GetBytesPerPixel( const PixelFormat pixelFormat );
+    QoiPixelFormat GetPixelFormat( ) const;
+    static UINT GetBytesPerPixel( const QoiPixelFormat pixelFormat );
 
 private:
-    PixelFormat ConvertPixelFormat( const UINT value ) const;
-    UINT ConvertPixelFormat( const PixelFormat pixelFormat ) const;
+    QoiPixelFormat ConvertPixelFormat( const UINT value ) const;
+    UINT ConvertPixelFormat( const QoiPixelFormat pixelFormat ) const;
 
     UINT m_width;
     UINT m_height;
-    PixelFormat m_pixelFormat;
+    QoiPixelFormat m_pixelFormat;
     std::vector<BYTE> m_bytes;
 };
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-} // namespace Lisa
-} // namespace ImageFormat
-} // namespace Wic
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
