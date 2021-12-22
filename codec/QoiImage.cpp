@@ -77,7 +77,7 @@ bool QoiImage::Read( IStream* pStream )
     if ( !stream.ReadBytes( &streamData[0], streamSize ) ) return false;
 
     qoi_desc qoiDesc;
-    m_bytes = qoi_decode( &streamData[0], streamSize, &qoiDesc, 4 );
+    m_bytes = qoi_decode( &streamData[0], streamSize, &qoiDesc, 0 );
 
     if ( m_bytes == NULL ) return false;
 
