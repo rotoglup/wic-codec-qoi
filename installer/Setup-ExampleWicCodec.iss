@@ -6,6 +6,8 @@
 #define AppPublisher  "René Slijkhuis"
 #define DecoderCLSID  "EB68FE9B-B1D7-4E76-8B68-781E5CFB5290"
 #define EncoderCLSID  "79CC92AA-B204-4B11-A341-1617D9CD8A88"
+#define PropertyHandlerCLSID "308BF946-3857-4083-B2B9-3D19093A7EA2"
+#define ContainerFormatCLSID "91DFBD70-3D2C-440F-B297-1E2097D4A833"
 
 [Setup]
 AppName =                           "{#AppName}"
@@ -53,7 +55,7 @@ Root: HKCR; Subkey: "CLSID\{{{#DecoderCLSID}}"; ValueType: string; ValueName: "A
 Root: HKCR; Subkey: "CLSID\{{{#DecoderCLSID}}"; ValueType: string; ValueName: "Description"; ValueData: "Example WIC Decoder";
 Root: HKCR; Subkey: "CLSID\{{{#DecoderCLSID}}"; ValueType: string; ValueName: "FileExtensions"; ValueData: ".lisa";
 Root: HKCR; Subkey: "CLSID\{{{#DecoderCLSID}}"; ValueType: string; ValueName: "FriendlyName"; ValueData: "Lisa Decoder";
-Root: HKCR; Subkey: "CLSID\{{{#DecoderCLSID}}"; ValueType: string; ValueName: "ContainerFormat"; ValueData: "{{91DFBD70-3D2C-440F-B297-1E2097D4A833}";
+Root: HKCR; Subkey: "CLSID\{{{#DecoderCLSID}}"; ValueType: string; ValueName: "ContainerFormat"; ValueData: "{{{#ContainerFormatCLSID}}";
 Root: HKCR; Subkey: "CLSID\{{{#DecoderCLSID}}"; ValueType: string; ValueName: "Vendor"; ValueData: "{{E27AE9AE-D620-4AEB-AD02-E2AE03104234}";
 Root: HKCR; Subkey: "CLSID\{{{#DecoderCLSID}}"; ValueType: string; ValueName: "Version"; ValueData: "{#AppVersion}";
 Root: HKCR; Subkey: "CLSID\{{{#DecoderCLSID}}"; ValueType: string; ValueName: "MimeTypes"; ValueData: "image/lisa";
@@ -82,7 +84,7 @@ Root: HKCR; Subkey: "CLSID\{{{#EncoderCLSID}}"; ValueType: string; ValueName: "A
 Root: HKCR; Subkey: "CLSID\{{{#EncoderCLSID}}"; ValueType: string; ValueName: "Description"; ValueData: "Example WIC Encoder";
 Root: HKCR; Subkey: "CLSID\{{{#EncoderCLSID}}"; ValueType: string; ValueName: "FileExtensions"; ValueData: ".lisa";
 Root: HKCR; Subkey: "CLSID\{{{#EncoderCLSID}}"; ValueType: string; ValueName: "FriendlyName"; ValueData: "Lisa Encoder";
-Root: HKCR; Subkey: "CLSID\{{{#EncoderCLSID}}"; ValueType: string; ValueName: "ContainerFormat"; ValueData: "{{91DFBD70-3D2C-440F-B297-1E2097D4A833}";
+Root: HKCR; Subkey: "CLSID\{{{#EncoderCLSID}}"; ValueType: string; ValueName: "ContainerFormat"; ValueData: "{{{#ContainerFormatCLSID}}";
 Root: HKCR; Subkey: "CLSID\{{{#EncoderCLSID}}"; ValueType: string; ValueName: "Vendor"; ValueData: "{{E27AE9AE-D620-4AEB-AD02-E2AE03104234}";
 Root: HKCR; Subkey: "CLSID\{{{#EncoderCLSID}}"; ValueType: string; ValueName: "Version"; ValueData: "{#AppVersion}";
 Root: HKCR; Subkey: "CLSID\{{{#EncoderCLSID}}"; ValueType: string; ValueName: "MimeTypes"; ValueData: "image/lisa";
@@ -117,7 +119,7 @@ Root: HKCR; Subkey: "Wow6432Node\CLSID\{{{#DecoderCLSID}}"; ValueType: string; V
 Root: HKCR; Subkey: "Wow6432Node\CLSID\{{{#DecoderCLSID}}"; ValueType: string; ValueName: "Description"; ValueData: "Example WIC Decoder";
 Root: HKCR; Subkey: "Wow6432Node\CLSID\{{{#DecoderCLSID}}"; ValueType: string; ValueName: "FileExtensions"; ValueData: ".lisa";
 Root: HKCR; Subkey: "Wow6432Node\CLSID\{{{#DecoderCLSID}}"; ValueType: string; ValueName: "FriendlyName"; ValueData: "Lisa Decoder";
-Root: HKCR; Subkey: "Wow6432Node\CLSID\{{{#DecoderCLSID}}"; ValueType: string; ValueName: "ContainerFormat"; ValueData: "{{91DFBD70-3D2C-440F-B297-1E2097D4A833}";
+Root: HKCR; Subkey: "Wow6432Node\CLSID\{{{#DecoderCLSID}}"; ValueType: string; ValueName: "ContainerFormat"; ValueData: "{{{#ContainerFormatCLSID}}";
 Root: HKCR; Subkey: "Wow6432Node\CLSID\{{{#DecoderCLSID}}"; ValueType: string; ValueName: "Vendor"; ValueData: "{{E27AE9AE-D620-4AEB-AD02-E2AE03104234}";
 Root: HKCR; Subkey: "Wow6432Node\CLSID\{{{#DecoderCLSID}}"; ValueType: string; ValueName: "Version"; ValueData: "{#AppVersion}";
 Root: HKCR; Subkey: "Wow6432Node\CLSID\{{{#DecoderCLSID}}"; ValueType: string; ValueName: "MimeTypes"; ValueData: "image/lisa";
@@ -146,7 +148,7 @@ Root: HKCR; Subkey: "Wow6432Node\CLSID\{{{#EncoderCLSID}}"; ValueType: string; V
 Root: HKCR; Subkey: "Wow6432Node\CLSID\{{{#EncoderCLSID}}"; ValueType: string; ValueName: "Description"; ValueData: "Example WIC Encoder";
 Root: HKCR; Subkey: "Wow6432Node\CLSID\{{{#EncoderCLSID}}"; ValueType: string; ValueName: "FileExtensions"; ValueData: ".lisa";
 Root: HKCR; Subkey: "Wow6432Node\CLSID\{{{#EncoderCLSID}}"; ValueType: string; ValueName: "FriendlyName"; ValueData: "Lisa Encoder";
-Root: HKCR; Subkey: "Wow6432Node\CLSID\{{{#EncoderCLSID}}"; ValueType: string; ValueName: "ContainerFormat"; ValueData: "{{91DFBD70-3D2C-440F-B297-1E2097D4A833}";
+Root: HKCR; Subkey: "Wow6432Node\CLSID\{{{#EncoderCLSID}}"; ValueType: string; ValueName: "ContainerFormat"; ValueData: "{{{#ContainerFormatCLSID}}";
 Root: HKCR; Subkey: "Wow6432Node\CLSID\{{{#EncoderCLSID}}"; ValueType: string; ValueName: "Vendor"; ValueData: "{{E27AE9AE-D620-4AEB-AD02-E2AE03104234}";
 Root: HKCR; Subkey: "Wow6432Node\CLSID\{{{#EncoderCLSID}}"; ValueType: string; ValueName: "Version"; ValueData: "{#AppVersion}";
 Root: HKCR; Subkey: "Wow6432Node\CLSID\{{{#EncoderCLSID}}"; ValueType: string; ValueName: "MimeTypes"; ValueData: "image/lisa";
@@ -171,12 +173,12 @@ Root: HKCR; Subkey: "Wow6432Node\CLSID\{{{#DecoderCLSID}}\Patterns\0"; ValueType
 Root: HKCR; Subkey: "Wow6432Node\CLSID\{{{#DecoderCLSID}}\Patterns\0"; ValueType: binary; ValueName: "Mask"; ValueData: "FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF";
 
 ; PropertyHandler
-Root: HKCR; Subkey: "CLSID\{{308BF946-3857-4083-B2B9-3D19093A7EA2}"; Flags: uninsdeletekey
-Root: HKCR; Subkey: "CLSID\{{308BF946-3857-4083-B2B9-3D19093A7EA2}"; ValueType: string; ValueName: ""; ValueData: "PropertyHandler";
-Root: HKCR; Subkey: "CLSID\{{308BF946-3857-4083-B2B9-3D19093A7EA2}"; ValueType: dword; ValueName: "ManualSafeSave"; ValueData: "1";
-Root: HKCR; Subkey: "CLSID\{{308BF946-3857-4083-B2B9-3D19093A7EA2}\InprocServer32";
-Root: HKCR; Subkey: "CLSID\{{308BF946-3857-4083-B2B9-3D19093A7EA2}\InprocServer32"; ValueType: string; ValueName: ""; ValueData: "{app}\WicCodec.dll";
-Root: HKCR; Subkey: "CLSID\{{308BF946-3857-4083-B2B9-3D19093A7EA2}\InprocServer32"; ValueType: string; ValueName: "ThreadingModel"; ValueData: "Apartment";
+Root: HKCR; Subkey: "CLSID\{{{#PropertyHandlerCLSID}}"; Flags: uninsdeletekey
+Root: HKCR; Subkey: "CLSID\{{{#PropertyHandlerCLSID}}"; ValueType: string; ValueName: ""; ValueData: "PropertyHandler";
+Root: HKCR; Subkey: "CLSID\{{{#PropertyHandlerCLSID}}"; ValueType: dword; ValueName: "ManualSafeSave"; ValueData: "1";
+Root: HKCR; Subkey: "CLSID\{{{#PropertyHandlerCLSID}}\InprocServer32";
+Root: HKCR; Subkey: "CLSID\{{{#PropertyHandlerCLSID}}\InprocServer32"; ValueType: string; ValueName: ""; ValueData: "{app}\WicCodec.dll";
+Root: HKCR; Subkey: "CLSID\{{{#PropertyHandlerCLSID}}\InprocServer32"; ValueType: string; ValueName: "ThreadingModel"; ValueData: "Apartment";
 
 ; RAW
 Root: HKCR; Subkey: ".lisa"; Flags: uninsdeletekeyifempty
@@ -215,8 +217,8 @@ Root: HKCR; Subkey: "ExampleWicFile\shellex\ContextMenuHandlers\{{649EAC06-3FB9-
 
 ; Windows shell integration
 ;     https://msdn.microsoft.com/en-us/library/windows/desktop/cc144110%28v=vs.85%29.aspx
-Root: HKLM; Subkey: "SOFTWARE\Microsoft\Windows\CurrentVersion\Shell Extensions\Approved"; ValueType: string; ValueName: "{{308BF946-3857-4083-B2B9-3D19093A7EA2}"; ValueData: "{#AppName}"; Flags: uninsdeletevalue
-Root: HKLM; Subkey: "SOFTWARE\Microsoft\Windows\CurrentVersion\PropertySystem\PropertyHandlers\.lisa"; ValueType: string; ValueName: ""; ValueData: "{{308BF946-3857-4083-B2B9-3D19093A7EA2}"; Flags: uninsdeletekey
+Root: HKLM; Subkey: "SOFTWARE\Microsoft\Windows\CurrentVersion\Shell Extensions\Approved"; ValueType: string; ValueName: "{{{#PropertyHandlerCLSID}}"; ValueData: "{#AppName}"; Flags: uninsdeletevalue
+Root: HKLM; Subkey: "SOFTWARE\Microsoft\Windows\CurrentVersion\PropertySystem\PropertyHandlers\.lisa"; ValueType: string; ValueName: ""; ValueData: "{{{#PropertyHandlerCLSID}}"; Flags: uninsdeletekey
 
 ;     https://msdn.microsoft.com/en-us/library/windows/desktop/cc144136%28v=vs.85%29.aspx
 Root: HKLM; Subkey: "SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\KindMap"; ValueType: string; ValueName: ".lisa"; ValueData: "picture";
