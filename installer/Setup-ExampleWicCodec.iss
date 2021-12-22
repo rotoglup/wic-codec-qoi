@@ -4,6 +4,8 @@
 #define AppVersion    "1.0.0"
 #define AppName       "Example WIC Codec"
 #define AppPublisher  "René Slijkhuis"
+#define DecoderCLSID  "EB68FE9B-B1D7-4E76-8B68-781E5CFB5290"
+#define EncoderCLSID  "79CC92AA-B204-4B11-A341-1617D9CD8A88"
 
 [Setup]
 AppName =                           "{#AppName}"
@@ -41,132 +43,132 @@ Source: "..\codec\bin\Win32\Release\WicCodec.dll"; DestDir: "{pf32}\{#AppName}";
 ; - https://msdn.microsoft.com/en-us/library/windows/desktop/ee719880(v=vs.85).aspx
 
 ; WIC Decoder - x64
-Root: HKCR; Subkey: "CLSID\{{7ED96837-96F0-4812-B211-F13C24117ED3}\Instance\{{EB68FE9B-B1D7-4E76-8B68-781E5CFB5290}"; Flags: uninsdeletekey
-Root: HKCR; Subkey: "CLSID\{{7ED96837-96F0-4812-B211-F13C24117ED3}\Instance\{{EB68FE9B-B1D7-4E76-8B68-781E5CFB5290}"; ValueType: string; ValueName: "CLSID"; ValueData: "{{EB68FE9B-B1D7-4E76-8B68-781E5CFB5290}";
-Root: HKCR; Subkey: "CLSID\{{7ED96837-96F0-4812-B211-F13C24117ED3}\Instance\{{EB68FE9B-B1D7-4E76-8B68-781E5CFB5290}"; ValueType: string; ValueName: "FriendlyName"; ValueData: "Lisa Decoder";
+Root: HKCR; Subkey: "CLSID\{{7ED96837-96F0-4812-B211-F13C24117ED3}\Instance\{{{#DecoderCLSID}}"; Flags: uninsdeletekey
+Root: HKCR; Subkey: "CLSID\{{7ED96837-96F0-4812-B211-F13C24117ED3}\Instance\{{{#DecoderCLSID}}"; ValueType: string; ValueName: "CLSID"; ValueData: "{{{#DecoderCLSID}}";
+Root: HKCR; Subkey: "CLSID\{{7ED96837-96F0-4812-B211-F13C24117ED3}\Instance\{{{#DecoderCLSID}}"; ValueType: string; ValueName: "FriendlyName"; ValueData: "Lisa Decoder";
 
-Root: HKCR; Subkey: "CLSID\{{EB68FE9B-B1D7-4E76-8B68-781E5CFB5290}"; Flags: uninsdeletekey
-Root: HKCR; Subkey: "CLSID\{{EB68FE9B-B1D7-4E76-8B68-781E5CFB5290}"; ValueType: string; ValueName: ""; ValueData: "Lisa Decoder";
-Root: HKCR; Subkey: "CLSID\{{EB68FE9B-B1D7-4E76-8B68-781E5CFB5290}"; ValueType: string; ValueName: "Author"; ValueData: "{#AppPublisher}";
-Root: HKCR; Subkey: "CLSID\{{EB68FE9B-B1D7-4E76-8B68-781E5CFB5290}"; ValueType: string; ValueName: "Description"; ValueData: "Example WIC Decoder";
-Root: HKCR; Subkey: "CLSID\{{EB68FE9B-B1D7-4E76-8B68-781E5CFB5290}"; ValueType: string; ValueName: "FileExtensions"; ValueData: ".lisa";
-Root: HKCR; Subkey: "CLSID\{{EB68FE9B-B1D7-4E76-8B68-781E5CFB5290}"; ValueType: string; ValueName: "FriendlyName"; ValueData: "Lisa Decoder";
-Root: HKCR; Subkey: "CLSID\{{EB68FE9B-B1D7-4E76-8B68-781E5CFB5290}"; ValueType: string; ValueName: "ContainerFormat"; ValueData: "{{91DFBD70-3D2C-440F-B297-1E2097D4A833}";
-Root: HKCR; Subkey: "CLSID\{{EB68FE9B-B1D7-4E76-8B68-781E5CFB5290}"; ValueType: string; ValueName: "Vendor"; ValueData: "{{E27AE9AE-D620-4AEB-AD02-E2AE03104234}";
-Root: HKCR; Subkey: "CLSID\{{EB68FE9B-B1D7-4E76-8B68-781E5CFB5290}"; ValueType: string; ValueName: "Version"; ValueData: "{#AppVersion}";
-Root: HKCR; Subkey: "CLSID\{{EB68FE9B-B1D7-4E76-8B68-781E5CFB5290}"; ValueType: string; ValueName: "MimeTypes"; ValueData: "image/lisa";
-Root: HKCR; Subkey: "CLSID\{{EB68FE9B-B1D7-4E76-8B68-781E5CFB5290}"; ValueType: dword;  ValueName: "SupportAnimation";  ValueData: "0";
-Root: HKCR; Subkey: "CLSID\{{EB68FE9B-B1D7-4E76-8B68-781E5CFB5290}"; ValueType: dword;  ValueName: "SupportChromaKey";  ValueData: "0";
-Root: HKCR; Subkey: "CLSID\{{EB68FE9B-B1D7-4E76-8B68-781E5CFB5290}"; ValueType: dword;  ValueName: "SupportLossless";   ValueData: "1";
-Root: HKCR; Subkey: "CLSID\{{EB68FE9B-B1D7-4E76-8B68-781E5CFB5290}"; ValueType: dword;  ValueName: "SupportMultiframe"; ValueData: "0";
+Root: HKCR; Subkey: "CLSID\{{{#DecoderCLSID}}"; Flags: uninsdeletekey
+Root: HKCR; Subkey: "CLSID\{{{#DecoderCLSID}}"; ValueType: string; ValueName: ""; ValueData: "Lisa Decoder";
+Root: HKCR; Subkey: "CLSID\{{{#DecoderCLSID}}"; ValueType: string; ValueName: "Author"; ValueData: "{#AppPublisher}";
+Root: HKCR; Subkey: "CLSID\{{{#DecoderCLSID}}"; ValueType: string; ValueName: "Description"; ValueData: "Example WIC Decoder";
+Root: HKCR; Subkey: "CLSID\{{{#DecoderCLSID}}"; ValueType: string; ValueName: "FileExtensions"; ValueData: ".lisa";
+Root: HKCR; Subkey: "CLSID\{{{#DecoderCLSID}}"; ValueType: string; ValueName: "FriendlyName"; ValueData: "Lisa Decoder";
+Root: HKCR; Subkey: "CLSID\{{{#DecoderCLSID}}"; ValueType: string; ValueName: "ContainerFormat"; ValueData: "{{91DFBD70-3D2C-440F-B297-1E2097D4A833}";
+Root: HKCR; Subkey: "CLSID\{{{#DecoderCLSID}}"; ValueType: string; ValueName: "Vendor"; ValueData: "{{E27AE9AE-D620-4AEB-AD02-E2AE03104234}";
+Root: HKCR; Subkey: "CLSID\{{{#DecoderCLSID}}"; ValueType: string; ValueName: "Version"; ValueData: "{#AppVersion}";
+Root: HKCR; Subkey: "CLSID\{{{#DecoderCLSID}}"; ValueType: string; ValueName: "MimeTypes"; ValueData: "image/lisa";
+Root: HKCR; Subkey: "CLSID\{{{#DecoderCLSID}}"; ValueType: dword;  ValueName: "SupportAnimation";  ValueData: "0";
+Root: HKCR; Subkey: "CLSID\{{{#DecoderCLSID}}"; ValueType: dword;  ValueName: "SupportChromaKey";  ValueData: "0";
+Root: HKCR; Subkey: "CLSID\{{{#DecoderCLSID}}"; ValueType: dword;  ValueName: "SupportLossless";   ValueData: "1";
+Root: HKCR; Subkey: "CLSID\{{{#DecoderCLSID}}"; ValueType: dword;  ValueName: "SupportMultiframe"; ValueData: "0";
 
 ; GUID_WICPixelFormat8bppGray
-Root: HKCR; Subkey: "CLSID\{{EB68FE9B-B1D7-4E76-8B68-781E5CFB5290}\Formats\{{6FDDC324-4E03-4BFE-B185-3D77768DC908}";
+Root: HKCR; Subkey: "CLSID\{{{#DecoderCLSID}}\Formats\{{6FDDC324-4E03-4BFE-B185-3D77768DC908}";
 ; GUID_WICPixelFormat24bppRGB
-Root: HKCR; Subkey: "CLSID\{{EB68FE9B-B1D7-4E76-8B68-781E5CFB5290}\Formats\{{6FDDC324-4E03-4BFE-B185-3D77768DC90D}";
+Root: HKCR; Subkey: "CLSID\{{{#DecoderCLSID}}\Formats\{{6FDDC324-4E03-4BFE-B185-3D77768DC90D}";
 
-Root: HKCR; Subkey: "CLSID\{{EB68FE9B-B1D7-4E76-8B68-781E5CFB5290}\InprocServer32";
-Root: HKCR; Subkey: "CLSID\{{EB68FE9B-B1D7-4E76-8B68-781E5CFB5290}\InprocServer32"; ValueType: string; ValueName: ""; ValueData: "{app}\WicCodec.dll";
-Root: HKCR; Subkey: "CLSID\{{EB68FE9B-B1D7-4E76-8B68-781E5CFB5290}\InprocServer32"; ValueType: string; ValueName: "ThreadingModel"; ValueData: "Both";
+Root: HKCR; Subkey: "CLSID\{{{#DecoderCLSID}}\InprocServer32";
+Root: HKCR; Subkey: "CLSID\{{{#DecoderCLSID}}\InprocServer32"; ValueType: string; ValueName: ""; ValueData: "{app}\WicCodec.dll";
+Root: HKCR; Subkey: "CLSID\{{{#DecoderCLSID}}\InprocServer32"; ValueType: string; ValueName: "ThreadingModel"; ValueData: "Both";
 
 ; WIC Encoder - x64
-Root: HKCR; Subkey: "CLSID\{{AC757296-3522-4E11-9862-C17BE5A1767E}\Instance\{{79CC92AA-B204-4B11-A341-1617D9CD8A88}"; Flags: uninsdeletekey
-Root: HKCR; Subkey: "CLSID\{{AC757296-3522-4E11-9862-C17BE5A1767E}\Instance\{{79CC92AA-B204-4B11-A341-1617D9CD8A88}"; ValueType: string; ValueName: "CLSID"; ValueData: "{{79CC92AA-B204-4B11-A341-1617D9CD8A88}";
-Root: HKCR; Subkey: "CLSID\{{AC757296-3522-4E11-9862-C17BE5A1767E}\Instance\{{79CC92AA-B204-4B11-A341-1617D9CD8A88}"; ValueType: string; ValueName: "FriendlyName"; ValueData: "Lisa Encoder";
+Root: HKCR; Subkey: "CLSID\{{AC757296-3522-4E11-9862-C17BE5A1767E}\Instance\{{{#EncoderCLSID}}"; Flags: uninsdeletekey
+Root: HKCR; Subkey: "CLSID\{{AC757296-3522-4E11-9862-C17BE5A1767E}\Instance\{{{#EncoderCLSID}}"; ValueType: string; ValueName: "CLSID"; ValueData: "{{{#EncoderCLSID}}";
+Root: HKCR; Subkey: "CLSID\{{AC757296-3522-4E11-9862-C17BE5A1767E}\Instance\{{{#EncoderCLSID}}"; ValueType: string; ValueName: "FriendlyName"; ValueData: "Lisa Encoder";
 
-Root: HKCR; Subkey: "CLSID\{{79CC92AA-B204-4B11-A341-1617D9CD8A88}"; Flags: uninsdeletekey
-Root: HKCR; Subkey: "CLSID\{{79CC92AA-B204-4B11-A341-1617D9CD8A88}"; ValueType: string; ValueName: ""; ValueData: "Lisa Encoder";
-Root: HKCR; Subkey: "CLSID\{{79CC92AA-B204-4B11-A341-1617D9CD8A88}"; ValueType: string; ValueName: "Author"; ValueData: "{#AppPublisher}";
-Root: HKCR; Subkey: "CLSID\{{79CC92AA-B204-4B11-A341-1617D9CD8A88}"; ValueType: string; ValueName: "Description"; ValueData: "Example WIC Encoder";
-Root: HKCR; Subkey: "CLSID\{{79CC92AA-B204-4B11-A341-1617D9CD8A88}"; ValueType: string; ValueName: "FileExtensions"; ValueData: ".lisa";
-Root: HKCR; Subkey: "CLSID\{{79CC92AA-B204-4B11-A341-1617D9CD8A88}"; ValueType: string; ValueName: "FriendlyName"; ValueData: "Lisa Encoder";
-Root: HKCR; Subkey: "CLSID\{{79CC92AA-B204-4B11-A341-1617D9CD8A88}"; ValueType: string; ValueName: "ContainerFormat"; ValueData: "{{91DFBD70-3D2C-440F-B297-1E2097D4A833}";
-Root: HKCR; Subkey: "CLSID\{{79CC92AA-B204-4B11-A341-1617D9CD8A88}"; ValueType: string; ValueName: "Vendor"; ValueData: "{{E27AE9AE-D620-4AEB-AD02-E2AE03104234}";
-Root: HKCR; Subkey: "CLSID\{{79CC92AA-B204-4B11-A341-1617D9CD8A88}"; ValueType: string; ValueName: "Version"; ValueData: "{#AppVersion}";
-Root: HKCR; Subkey: "CLSID\{{79CC92AA-B204-4B11-A341-1617D9CD8A88}"; ValueType: string; ValueName: "MimeTypes"; ValueData: "image/lisa";
-Root: HKCR; Subkey: "CLSID\{{79CC92AA-B204-4B11-A341-1617D9CD8A88}"; ValueType: dword;  ValueName: "SupportAnimation";  ValueData: "0";
-Root: HKCR; Subkey: "CLSID\{{79CC92AA-B204-4B11-A341-1617D9CD8A88}"; ValueType: dword;  ValueName: "SupportChromaKey";  ValueData: "0";
-Root: HKCR; Subkey: "CLSID\{{79CC92AA-B204-4B11-A341-1617D9CD8A88}"; ValueType: dword;  ValueName: "SupportLossless";   ValueData: "1";
-Root: HKCR; Subkey: "CLSID\{{79CC92AA-B204-4B11-A341-1617D9CD8A88}"; ValueType: dword;  ValueName: "SupportMultiframe"; ValueData: "0";
+Root: HKCR; Subkey: "CLSID\{{{#EncoderCLSID}}"; Flags: uninsdeletekey
+Root: HKCR; Subkey: "CLSID\{{{#EncoderCLSID}}"; ValueType: string; ValueName: ""; ValueData: "Lisa Encoder";
+Root: HKCR; Subkey: "CLSID\{{{#EncoderCLSID}}"; ValueType: string; ValueName: "Author"; ValueData: "{#AppPublisher}";
+Root: HKCR; Subkey: "CLSID\{{{#EncoderCLSID}}"; ValueType: string; ValueName: "Description"; ValueData: "Example WIC Encoder";
+Root: HKCR; Subkey: "CLSID\{{{#EncoderCLSID}}"; ValueType: string; ValueName: "FileExtensions"; ValueData: ".lisa";
+Root: HKCR; Subkey: "CLSID\{{{#EncoderCLSID}}"; ValueType: string; ValueName: "FriendlyName"; ValueData: "Lisa Encoder";
+Root: HKCR; Subkey: "CLSID\{{{#EncoderCLSID}}"; ValueType: string; ValueName: "ContainerFormat"; ValueData: "{{91DFBD70-3D2C-440F-B297-1E2097D4A833}";
+Root: HKCR; Subkey: "CLSID\{{{#EncoderCLSID}}"; ValueType: string; ValueName: "Vendor"; ValueData: "{{E27AE9AE-D620-4AEB-AD02-E2AE03104234}";
+Root: HKCR; Subkey: "CLSID\{{{#EncoderCLSID}}"; ValueType: string; ValueName: "Version"; ValueData: "{#AppVersion}";
+Root: HKCR; Subkey: "CLSID\{{{#EncoderCLSID}}"; ValueType: string; ValueName: "MimeTypes"; ValueData: "image/lisa";
+Root: HKCR; Subkey: "CLSID\{{{#EncoderCLSID}}"; ValueType: dword;  ValueName: "SupportAnimation";  ValueData: "0";
+Root: HKCR; Subkey: "CLSID\{{{#EncoderCLSID}}"; ValueType: dword;  ValueName: "SupportChromaKey";  ValueData: "0";
+Root: HKCR; Subkey: "CLSID\{{{#EncoderCLSID}}"; ValueType: dword;  ValueName: "SupportLossless";   ValueData: "1";
+Root: HKCR; Subkey: "CLSID\{{{#EncoderCLSID}}"; ValueType: dword;  ValueName: "SupportMultiframe"; ValueData: "0";
 
 ; GUID_WICPixelFormat8bppGray
-Root: HKCR; Subkey: "CLSID\{{79CC92AA-B204-4B11-A341-1617D9CD8A88}\Formats\{{6FDDC324-4E03-4BFE-B185-3D77768DC908}";
+Root: HKCR; Subkey: "CLSID\{{{#EncoderCLSID}}\Formats\{{6FDDC324-4E03-4BFE-B185-3D77768DC908}";
 ; GUID_WICPixelFormat24bppRGB
-Root: HKCR; Subkey: "CLSID\{{79CC92AA-B204-4B11-A341-1617D9CD8A88}\Formats\{{6FDDC324-4E03-4BFE-B185-3D77768DC90D}";
+Root: HKCR; Subkey: "CLSID\{{{#EncoderCLSID}}\Formats\{{6FDDC324-4E03-4BFE-B185-3D77768DC90D}";
 
-Root: HKCR; Subkey: "CLSID\{{79CC92AA-B204-4B11-A341-1617D9CD8A88}\InprocServer32";
-Root: HKCR; Subkey: "CLSID\{{79CC92AA-B204-4B11-A341-1617D9CD8A88}\InprocServer32"; ValueType: string; ValueName: ""; ValueData: "{app}\WicCodec.dll";
-Root: HKCR; Subkey: "CLSID\{{79CC92AA-B204-4B11-A341-1617D9CD8A88}\InprocServer32"; ValueType: string; ValueName: "ThreadingModel"; ValueData: "Both";
+Root: HKCR; Subkey: "CLSID\{{{#EncoderCLSID}}\InprocServer32";
+Root: HKCR; Subkey: "CLSID\{{{#EncoderCLSID}}\InprocServer32"; ValueType: string; ValueName: ""; ValueData: "{app}\WicCodec.dll";
+Root: HKCR; Subkey: "CLSID\{{{#EncoderCLSID}}\InprocServer32"; ValueType: string; ValueName: "ThreadingModel"; ValueData: "Both";
 
-Root: HKCR; Subkey: "CLSID\{{EB68FE9B-B1D7-4E76-8B68-781E5CFB5290}\Patterns\0";
-Root: HKCR; Subkey: "CLSID\{{EB68FE9B-B1D7-4E76-8B68-781E5CFB5290}\Patterns\0"; ValueType: dword; ValueName: "Position"; ValueData: "0";
-Root: HKCR; Subkey: "CLSID\{{EB68FE9B-B1D7-4E76-8B68-781E5CFB5290}\Patterns\0"; ValueType: dword; ValueName: "Length"; ValueData: "21";
-Root: HKCR; Subkey: "CLSID\{{EB68FE9B-B1D7-4E76-8B68-781E5CFB5290}\Patterns\0"; ValueType: binary; ValueName: "Pattern"; ValueData: "4C 49 53 41 00 17 26 71 F7 9E CC 43 4B BC 7A 8F 21 5D 77 DE 35";
-Root: HKCR; Subkey: "CLSID\{{EB68FE9B-B1D7-4E76-8B68-781E5CFB5290}\Patterns\0"; ValueType: binary; ValueName: "Mask"; ValueData: "FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF";
+Root: HKCR; Subkey: "CLSID\{{{#DecoderCLSID}}\Patterns\0";
+Root: HKCR; Subkey: "CLSID\{{{#DecoderCLSID}}\Patterns\0"; ValueType: dword; ValueName: "Position"; ValueData: "0";
+Root: HKCR; Subkey: "CLSID\{{{#DecoderCLSID}}\Patterns\0"; ValueType: dword; ValueName: "Length"; ValueData: "21";
+Root: HKCR; Subkey: "CLSID\{{{#DecoderCLSID}}\Patterns\0"; ValueType: binary; ValueName: "Pattern"; ValueData: "4C 49 53 41 00 17 26 71 F7 9E CC 43 4B BC 7A 8F 21 5D 77 DE 35";
+Root: HKCR; Subkey: "CLSID\{{{#DecoderCLSID}}\Patterns\0"; ValueType: binary; ValueName: "Mask"; ValueData: "FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF";
 
 ; WIC Decoder - x86
-Root: HKCR; Subkey: "Wow6432Node\CLSID\{{7ED96837-96F0-4812-B211-F13C24117ED3}\Instance\{{EB68FE9B-B1D7-4E76-8B68-781E5CFB5290}"; Flags: uninsdeletekey
-Root: HKCR; Subkey: "Wow6432Node\CLSID\{{7ED96837-96F0-4812-B211-F13C24117ED3}\Instance\{{EB68FE9B-B1D7-4E76-8B68-781E5CFB5290}"; ValueType: string; ValueName: "CLSID"; ValueData: "{{EB68FE9B-B1D7-4E76-8B68-781E5CFB5290}";
-Root: HKCR; Subkey: "Wow6432Node\CLSID\{{7ED96837-96F0-4812-B211-F13C24117ED3}\Instance\{{EB68FE9B-B1D7-4E76-8B68-781E5CFB5290}"; ValueType: string; ValueName: "FriendlyName"; ValueData: "Lisa Decoder";
+Root: HKCR; Subkey: "Wow6432Node\CLSID\{{7ED96837-96F0-4812-B211-F13C24117ED3}\Instance\{{{#DecoderCLSID}}"; Flags: uninsdeletekey
+Root: HKCR; Subkey: "Wow6432Node\CLSID\{{7ED96837-96F0-4812-B211-F13C24117ED3}\Instance\{{{#DecoderCLSID}}"; ValueType: string; ValueName: "CLSID"; ValueData: "{{{#DecoderCLSID}}";
+Root: HKCR; Subkey: "Wow6432Node\CLSID\{{7ED96837-96F0-4812-B211-F13C24117ED3}\Instance\{{{#DecoderCLSID}}"; ValueType: string; ValueName: "FriendlyName"; ValueData: "Lisa Decoder";
 
-Root: HKCR; Subkey: "Wow6432Node\CLSID\{{EB68FE9B-B1D7-4E76-8B68-781E5CFB5290}"; Flags: uninsdeletekey
-Root: HKCR; Subkey: "Wow6432Node\CLSID\{{EB68FE9B-B1D7-4E76-8B68-781E5CFB5290}"; ValueType: string; ValueName: ""; ValueData: "Lisa Decoder";
-Root: HKCR; Subkey: "Wow6432Node\CLSID\{{EB68FE9B-B1D7-4E76-8B68-781E5CFB5290}"; ValueType: string; ValueName: "Author"; ValueData: "{#AppPublisher}";
-Root: HKCR; Subkey: "Wow6432Node\CLSID\{{EB68FE9B-B1D7-4E76-8B68-781E5CFB5290}"; ValueType: string; ValueName: "Description"; ValueData: "Example WIC Decoder";
-Root: HKCR; Subkey: "Wow6432Node\CLSID\{{EB68FE9B-B1D7-4E76-8B68-781E5CFB5290}"; ValueType: string; ValueName: "FileExtensions"; ValueData: ".lisa";
-Root: HKCR; Subkey: "Wow6432Node\CLSID\{{EB68FE9B-B1D7-4E76-8B68-781E5CFB5290}"; ValueType: string; ValueName: "FriendlyName"; ValueData: "Lisa Decoder";
-Root: HKCR; Subkey: "Wow6432Node\CLSID\{{EB68FE9B-B1D7-4E76-8B68-781E5CFB5290}"; ValueType: string; ValueName: "ContainerFormat"; ValueData: "{{91DFBD70-3D2C-440F-B297-1E2097D4A833}";
-Root: HKCR; Subkey: "Wow6432Node\CLSID\{{EB68FE9B-B1D7-4E76-8B68-781E5CFB5290}"; ValueType: string; ValueName: "Vendor"; ValueData: "{{E27AE9AE-D620-4AEB-AD02-E2AE03104234}";
-Root: HKCR; Subkey: "Wow6432Node\CLSID\{{EB68FE9B-B1D7-4E76-8B68-781E5CFB5290}"; ValueType: string; ValueName: "Version"; ValueData: "{#AppVersion}";
-Root: HKCR; Subkey: "Wow6432Node\CLSID\{{EB68FE9B-B1D7-4E76-8B68-781E5CFB5290}"; ValueType: string; ValueName: "MimeTypes"; ValueData: "image/lisa";
-Root: HKCR; Subkey: "Wow6432Node\CLSID\{{EB68FE9B-B1D7-4E76-8B68-781E5CFB5290}"; ValueType: dword;  ValueName: "SupportAnimation";  ValueData: "0";
-Root: HKCR; Subkey: "Wow6432Node\CLSID\{{EB68FE9B-B1D7-4E76-8B68-781E5CFB5290}"; ValueType: dword;  ValueName: "SupportChromaKey";  ValueData: "0";
-Root: HKCR; Subkey: "Wow6432Node\CLSID\{{EB68FE9B-B1D7-4E76-8B68-781E5CFB5290}"; ValueType: dword;  ValueName: "SupportLossless";   ValueData: "1";
-Root: HKCR; Subkey: "Wow6432Node\CLSID\{{EB68FE9B-B1D7-4E76-8B68-781E5CFB5290}"; ValueType: dword;  ValueName: "SupportMultiframe"; ValueData: "0";
+Root: HKCR; Subkey: "Wow6432Node\CLSID\{{{#DecoderCLSID}}"; Flags: uninsdeletekey
+Root: HKCR; Subkey: "Wow6432Node\CLSID\{{{#DecoderCLSID}}"; ValueType: string; ValueName: ""; ValueData: "Lisa Decoder";
+Root: HKCR; Subkey: "Wow6432Node\CLSID\{{{#DecoderCLSID}}"; ValueType: string; ValueName: "Author"; ValueData: "{#AppPublisher}";
+Root: HKCR; Subkey: "Wow6432Node\CLSID\{{{#DecoderCLSID}}"; ValueType: string; ValueName: "Description"; ValueData: "Example WIC Decoder";
+Root: HKCR; Subkey: "Wow6432Node\CLSID\{{{#DecoderCLSID}}"; ValueType: string; ValueName: "FileExtensions"; ValueData: ".lisa";
+Root: HKCR; Subkey: "Wow6432Node\CLSID\{{{#DecoderCLSID}}"; ValueType: string; ValueName: "FriendlyName"; ValueData: "Lisa Decoder";
+Root: HKCR; Subkey: "Wow6432Node\CLSID\{{{#DecoderCLSID}}"; ValueType: string; ValueName: "ContainerFormat"; ValueData: "{{91DFBD70-3D2C-440F-B297-1E2097D4A833}";
+Root: HKCR; Subkey: "Wow6432Node\CLSID\{{{#DecoderCLSID}}"; ValueType: string; ValueName: "Vendor"; ValueData: "{{E27AE9AE-D620-4AEB-AD02-E2AE03104234}";
+Root: HKCR; Subkey: "Wow6432Node\CLSID\{{{#DecoderCLSID}}"; ValueType: string; ValueName: "Version"; ValueData: "{#AppVersion}";
+Root: HKCR; Subkey: "Wow6432Node\CLSID\{{{#DecoderCLSID}}"; ValueType: string; ValueName: "MimeTypes"; ValueData: "image/lisa";
+Root: HKCR; Subkey: "Wow6432Node\CLSID\{{{#DecoderCLSID}}"; ValueType: dword;  ValueName: "SupportAnimation";  ValueData: "0";
+Root: HKCR; Subkey: "Wow6432Node\CLSID\{{{#DecoderCLSID}}"; ValueType: dword;  ValueName: "SupportChromaKey";  ValueData: "0";
+Root: HKCR; Subkey: "Wow6432Node\CLSID\{{{#DecoderCLSID}}"; ValueType: dword;  ValueName: "SupportLossless";   ValueData: "1";
+Root: HKCR; Subkey: "Wow6432Node\CLSID\{{{#DecoderCLSID}}"; ValueType: dword;  ValueName: "SupportMultiframe"; ValueData: "0";
 
 ; GUID_WICPixelFormat8bppGray
-Root: HKCR; Subkey: "Wow6432Node\CLSID\{{EB68FE9B-B1D7-4E76-8B68-781E5CFB5290}\Formats\{{6FDDC324-4E03-4BFE-B185-3D77768DC908}";
+Root: HKCR; Subkey: "Wow6432Node\CLSID\{{{#DecoderCLSID}}\Formats\{{6FDDC324-4E03-4BFE-B185-3D77768DC908}";
 ; GUID_WICPixelFormat24bppRGB
-Root: HKCR; Subkey: "Wow6432Node\CLSID\{{EB68FE9B-B1D7-4E76-8B68-781E5CFB5290}\Formats\{{6FDDC324-4E03-4BFE-B185-3D77768DC90D}";
+Root: HKCR; Subkey: "Wow6432Node\CLSID\{{{#DecoderCLSID}}\Formats\{{6FDDC324-4E03-4BFE-B185-3D77768DC90D}";
 
-Root: HKCR; Subkey: "Wow6432Node\CLSID\{{EB68FE9B-B1D7-4E76-8B68-781E5CFB5290}\InprocServer32";
-Root: HKCR; Subkey: "Wow6432Node\CLSID\{{EB68FE9B-B1D7-4E76-8B68-781E5CFB5290}\InprocServer32"; ValueType: string; ValueName: ""; ValueData: "{pf32}\{#AppName}\WicCodec.dll";
-Root: HKCR; Subkey: "Wow6432Node\CLSID\{{EB68FE9B-B1D7-4E76-8B68-781E5CFB5290}\InprocServer32"; ValueType: string; ValueName: "ThreadingModel"; ValueData: "Both";
+Root: HKCR; Subkey: "Wow6432Node\CLSID\{{{#DecoderCLSID}}\InprocServer32";
+Root: HKCR; Subkey: "Wow6432Node\CLSID\{{{#DecoderCLSID}}\InprocServer32"; ValueType: string; ValueName: ""; ValueData: "{pf32}\{#AppName}\WicCodec.dll";
+Root: HKCR; Subkey: "Wow6432Node\CLSID\{{{#DecoderCLSID}}\InprocServer32"; ValueType: string; ValueName: "ThreadingModel"; ValueData: "Both";
 
 ; WIC Encoder - x86
-Root: HKCR; Subkey: "Wow6432Node\CLSID\{{AC757296-3522-4E11-9862-C17BE5A1767E}\Instance\{{79CC92AA-B204-4B11-A341-1617D9CD8A88}"; Flags: uninsdeletekey
-Root: HKCR; Subkey: "Wow6432Node\CLSID\{{AC757296-3522-4E11-9862-C17BE5A1767E}\Instance\{{79CC92AA-B204-4B11-A341-1617D9CD8A88}"; ValueType: string; ValueName: "CLSID"; ValueData: "{{79CC92AA-B204-4B11-A341-1617D9CD8A88}";
-Root: HKCR; Subkey: "Wow6432Node\CLSID\{{AC757296-3522-4E11-9862-C17BE5A1767E}\Instance\{{79CC92AA-B204-4B11-A341-1617D9CD8A88}"; ValueType: string; ValueName: "FriendlyName"; ValueData: "Lisa Encoder";
+Root: HKCR; Subkey: "Wow6432Node\CLSID\{{AC757296-3522-4E11-9862-C17BE5A1767E}\Instance\{{{#EncoderCLSID}}"; Flags: uninsdeletekey
+Root: HKCR; Subkey: "Wow6432Node\CLSID\{{AC757296-3522-4E11-9862-C17BE5A1767E}\Instance\{{{#EncoderCLSID}}"; ValueType: string; ValueName: "CLSID"; ValueData: "{{{#EncoderCLSID}}";
+Root: HKCR; Subkey: "Wow6432Node\CLSID\{{AC757296-3522-4E11-9862-C17BE5A1767E}\Instance\{{{#EncoderCLSID}}"; ValueType: string; ValueName: "FriendlyName"; ValueData: "Lisa Encoder";
 
-Root: HKCR; Subkey: "Wow6432Node\CLSID\{{79CC92AA-B204-4B11-A341-1617D9CD8A88}"; Flags: uninsdeletekey
-Root: HKCR; Subkey: "Wow6432Node\CLSID\{{79CC92AA-B204-4B11-A341-1617D9CD8A88}"; ValueType: string; ValueName: ""; ValueData: "Lisa Encoder";
-Root: HKCR; Subkey: "Wow6432Node\CLSID\{{79CC92AA-B204-4B11-A341-1617D9CD8A88}"; ValueType: string; ValueName: "Author"; ValueData: "{#AppPublisher}";
-Root: HKCR; Subkey: "Wow6432Node\CLSID\{{79CC92AA-B204-4B11-A341-1617D9CD8A88}"; ValueType: string; ValueName: "Description"; ValueData: "Example WIC Encoder";
-Root: HKCR; Subkey: "Wow6432Node\CLSID\{{79CC92AA-B204-4B11-A341-1617D9CD8A88}"; ValueType: string; ValueName: "FileExtensions"; ValueData: ".lisa";
-Root: HKCR; Subkey: "Wow6432Node\CLSID\{{79CC92AA-B204-4B11-A341-1617D9CD8A88}"; ValueType: string; ValueName: "FriendlyName"; ValueData: "Lisa Encoder";
-Root: HKCR; Subkey: "Wow6432Node\CLSID\{{79CC92AA-B204-4B11-A341-1617D9CD8A88}"; ValueType: string; ValueName: "ContainerFormat"; ValueData: "{{91DFBD70-3D2C-440F-B297-1E2097D4A833}";
-Root: HKCR; Subkey: "Wow6432Node\CLSID\{{79CC92AA-B204-4B11-A341-1617D9CD8A88}"; ValueType: string; ValueName: "Vendor"; ValueData: "{{E27AE9AE-D620-4AEB-AD02-E2AE03104234}";
-Root: HKCR; Subkey: "Wow6432Node\CLSID\{{79CC92AA-B204-4B11-A341-1617D9CD8A88}"; ValueType: string; ValueName: "Version"; ValueData: "{#AppVersion}";
-Root: HKCR; Subkey: "Wow6432Node\CLSID\{{79CC92AA-B204-4B11-A341-1617D9CD8A88}"; ValueType: string; ValueName: "MimeTypes"; ValueData: "image/lisa";
-Root: HKCR; Subkey: "Wow6432Node\CLSID\{{79CC92AA-B204-4B11-A341-1617D9CD8A88}"; ValueType: dword;  ValueName: "SupportAnimation";  ValueData: "0";
-Root: HKCR; Subkey: "Wow6432Node\CLSID\{{79CC92AA-B204-4B11-A341-1617D9CD8A88}"; ValueType: dword;  ValueName: "SupportChromaKey";  ValueData: "0";
-Root: HKCR; Subkey: "Wow6432Node\CLSID\{{79CC92AA-B204-4B11-A341-1617D9CD8A88}"; ValueType: dword;  ValueName: "SupportLossless";   ValueData: "1";
-Root: HKCR; Subkey: "Wow6432Node\CLSID\{{79CC92AA-B204-4B11-A341-1617D9CD8A88}"; ValueType: dword;  ValueName: "SupportMultiframe"; ValueData: "0";
+Root: HKCR; Subkey: "Wow6432Node\CLSID\{{{#EncoderCLSID}}"; Flags: uninsdeletekey
+Root: HKCR; Subkey: "Wow6432Node\CLSID\{{{#EncoderCLSID}}"; ValueType: string; ValueName: ""; ValueData: "Lisa Encoder";
+Root: HKCR; Subkey: "Wow6432Node\CLSID\{{{#EncoderCLSID}}"; ValueType: string; ValueName: "Author"; ValueData: "{#AppPublisher}";
+Root: HKCR; Subkey: "Wow6432Node\CLSID\{{{#EncoderCLSID}}"; ValueType: string; ValueName: "Description"; ValueData: "Example WIC Encoder";
+Root: HKCR; Subkey: "Wow6432Node\CLSID\{{{#EncoderCLSID}}"; ValueType: string; ValueName: "FileExtensions"; ValueData: ".lisa";
+Root: HKCR; Subkey: "Wow6432Node\CLSID\{{{#EncoderCLSID}}"; ValueType: string; ValueName: "FriendlyName"; ValueData: "Lisa Encoder";
+Root: HKCR; Subkey: "Wow6432Node\CLSID\{{{#EncoderCLSID}}"; ValueType: string; ValueName: "ContainerFormat"; ValueData: "{{91DFBD70-3D2C-440F-B297-1E2097D4A833}";
+Root: HKCR; Subkey: "Wow6432Node\CLSID\{{{#EncoderCLSID}}"; ValueType: string; ValueName: "Vendor"; ValueData: "{{E27AE9AE-D620-4AEB-AD02-E2AE03104234}";
+Root: HKCR; Subkey: "Wow6432Node\CLSID\{{{#EncoderCLSID}}"; ValueType: string; ValueName: "Version"; ValueData: "{#AppVersion}";
+Root: HKCR; Subkey: "Wow6432Node\CLSID\{{{#EncoderCLSID}}"; ValueType: string; ValueName: "MimeTypes"; ValueData: "image/lisa";
+Root: HKCR; Subkey: "Wow6432Node\CLSID\{{{#EncoderCLSID}}"; ValueType: dword;  ValueName: "SupportAnimation";  ValueData: "0";
+Root: HKCR; Subkey: "Wow6432Node\CLSID\{{{#EncoderCLSID}}"; ValueType: dword;  ValueName: "SupportChromaKey";  ValueData: "0";
+Root: HKCR; Subkey: "Wow6432Node\CLSID\{{{#EncoderCLSID}}"; ValueType: dword;  ValueName: "SupportLossless";   ValueData: "1";
+Root: HKCR; Subkey: "Wow6432Node\CLSID\{{{#EncoderCLSID}}"; ValueType: dword;  ValueName: "SupportMultiframe"; ValueData: "0";
 
 ; GUID_WICPixelFormat8bppGray
-Root: HKCR; Subkey: "Wow6432Node\CLSID\{{79CC92AA-B204-4B11-A341-1617D9CD8A88}\Formats\{{6FDDC324-4E03-4BFE-B185-3D77768DC908}";
+Root: HKCR; Subkey: "Wow6432Node\CLSID\{{{#EncoderCLSID}}\Formats\{{6FDDC324-4E03-4BFE-B185-3D77768DC908}";
 ; GUID_WICPixelFormat24bppRGB
-Root: HKCR; Subkey: "Wow6432Node\CLSID\{{79CC92AA-B204-4B11-A341-1617D9CD8A88}\Formats\{{6FDDC324-4E03-4BFE-B185-3D77768DC90D}";
+Root: HKCR; Subkey: "Wow6432Node\CLSID\{{{#EncoderCLSID}}\Formats\{{6FDDC324-4E03-4BFE-B185-3D77768DC90D}";
 
-Root: HKCR; Subkey: "Wow6432Node\CLSID\{{79CC92AA-B204-4B11-A341-1617D9CD8A88}\InprocServer32";
-Root: HKCR; Subkey: "Wow6432Node\CLSID\{{79CC92AA-B204-4B11-A341-1617D9CD8A88}\InprocServer32"; ValueType: string; ValueName: ""; ValueData: "{pf32}\{#AppName}\WicCodec.dll";
-Root: HKCR; Subkey: "Wow6432Node\CLSID\{{79CC92AA-B204-4B11-A341-1617D9CD8A88}\InprocServer32"; ValueType: string; ValueName: "ThreadingModel"; ValueData: "Both";
+Root: HKCR; Subkey: "Wow6432Node\CLSID\{{{#EncoderCLSID}}\InprocServer32";
+Root: HKCR; Subkey: "Wow6432Node\CLSID\{{{#EncoderCLSID}}\InprocServer32"; ValueType: string; ValueName: ""; ValueData: "{pf32}\{#AppName}\WicCodec.dll";
+Root: HKCR; Subkey: "Wow6432Node\CLSID\{{{#EncoderCLSID}}\InprocServer32"; ValueType: string; ValueName: "ThreadingModel"; ValueData: "Both";
 
-Root: HKCR; Subkey: "Wow6432Node\CLSID\{{EB68FE9B-B1D7-4E76-8B68-781E5CFB5290}\Patterns\0";
-Root: HKCR; Subkey: "Wow6432Node\CLSID\{{EB68FE9B-B1D7-4E76-8B68-781E5CFB5290}\Patterns\0"; ValueType: dword; ValueName: "Position"; ValueData: "0";
-Root: HKCR; Subkey: "Wow6432Node\CLSID\{{EB68FE9B-B1D7-4E76-8B68-781E5CFB5290}\Patterns\0"; ValueType: dword; ValueName: "Length"; ValueData: "21";
-Root: HKCR; Subkey: "Wow6432Node\CLSID\{{EB68FE9B-B1D7-4E76-8B68-781E5CFB5290}\Patterns\0"; ValueType: binary; ValueName: "Pattern"; ValueData: "4C 49 53 41 00 17 26 71 F7 9E CC 43 4B BC 7A 8F 21 5D 77 DE 35";
-Root: HKCR; Subkey: "Wow6432Node\CLSID\{{EB68FE9B-B1D7-4E76-8B68-781E5CFB5290}\Patterns\0"; ValueType: binary; ValueName: "Mask"; ValueData: "FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF";
+Root: HKCR; Subkey: "Wow6432Node\CLSID\{{{#DecoderCLSID}}\Patterns\0";
+Root: HKCR; Subkey: "Wow6432Node\CLSID\{{{#DecoderCLSID}}\Patterns\0"; ValueType: dword; ValueName: "Position"; ValueData: "0";
+Root: HKCR; Subkey: "Wow6432Node\CLSID\{{{#DecoderCLSID}}\Patterns\0"; ValueType: dword; ValueName: "Length"; ValueData: "21";
+Root: HKCR; Subkey: "Wow6432Node\CLSID\{{{#DecoderCLSID}}\Patterns\0"; ValueType: binary; ValueName: "Pattern"; ValueData: "4C 49 53 41 00 17 26 71 F7 9E CC 43 4B BC 7A 8F 21 5D 77 DE 35";
+Root: HKCR; Subkey: "Wow6432Node\CLSID\{{{#DecoderCLSID}}\Patterns\0"; ValueType: binary; ValueName: "Mask"; ValueData: "FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF";
 
 ; PropertyHandler
 Root: HKCR; Subkey: "CLSID\{{308BF946-3857-4083-B2B9-3D19093A7EA2}"; Flags: uninsdeletekey
