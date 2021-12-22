@@ -207,13 +207,13 @@ IFACEMETHODIMP PropertyStore::GetValue( REFPROPERTYKEY key, PROPVARIANT* pValue 
         UINT bitDepth = 0;
         QoiPixelFormat pixelFormat = m_image.GetPixelFormat( );
 
-        if ( pixelFormat == QoiPixelFormat::UInt8 )
-        {
-            bitDepth = 8;
-        }
-        else if ( pixelFormat == QoiPixelFormat::RGB24 )
+        if ( pixelFormat == QoiPixelFormat::RGB24 )
         {
             bitDepth = 24;
+        }
+        else if ( pixelFormat == QoiPixelFormat::RGBA32 )
+        {
+            bitDepth = 32;
         }
         else
         {

@@ -2,7 +2,7 @@
 //
 //    MIT License
 //
-//    Copyright(c) 2017 Renï¿½ Slijkhuis
+//    Copyright(c) 2017 René Slijkhuis
 //
 //    Permission is hereby granted, free of charge, to any person obtaining a copy
 //    of this software and associated documentation files (the "Software"), to deal
@@ -30,6 +30,10 @@
 #include "StreamReader.h"
 #include "StreamWriter.h"
 
+#define QOI_NO_STDIO
+#define QOI_IMPLEMENTATION
+#include "qoi.h"
+
 using namespace std;
 using namespace Wic::ImageFormat::Utilities;
 
@@ -39,7 +43,8 @@ using namespace Wic::ImageFormat::Utilities;
 QoiImage::QoiImage( ) :
     m_width( 0 ),
     m_height( 0 ),
-    m_pixelFormat( QoiPixelFormat::Unknown )
+    m_pixelFormat( QoiPixelFormat::Unknown ),
+    m_bytes( NULL )
 {
 }
 
@@ -47,6 +52,11 @@ QoiImage::QoiImage( ) :
 
 QoiImage::~QoiImage( )
 {
+    if (m_bytes != NULL)
+    {
+        free( m_bytes );
+        m_bytes = NULL;
+    }
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -57,29 +67,27 @@ bool QoiImage::Read( IStream* pStream )
 
     StreamReader stream( pStream );
 
-    if ( !stream.SetPosition( 21 ) ) return false;
+    UINT64 streamSize64 = stream.GetSize();
+    if (streamSize64 > INT_MAX) return false;
 
-    UINT version;
-    if ( !stream.ReadUInt32( version ) ) return false;
-    if ( version != 1 ) return false;
+    int streamSize = (int)streamSize64;
+    
+    std::vector<BYTE> streamData;
+    streamData.resize( streamSize );
+    if ( !stream.ReadBytes( &streamData[0], streamSize ) ) return false;
 
-    if ( !stream.ReadUInt32( m_width ) ) return false;
-    if ( !stream.ReadUInt32( m_height ) ) return false;
+    qoi_desc qoiDesc;
+    m_bytes = qoi_decode( &streamData[0], streamSize, &qoiDesc, 4 );
 
-    UINT value;
-    if ( !stream.ReadUInt32( value ) ) return false;
-    m_pixelFormat = ConvertPixelFormat( value );
-    if ( m_pixelFormat == QoiPixelFormat::Unknown ) return false;
+    if ( m_bytes == NULL ) return false;
 
-    UINT offset = 0;
-    if ( !stream.ReadUInt32( offset ) ) return false;
-    if ( !stream.SetPosition( offset ) ) return false;
+    m_width  = qoiDesc.width;
+    m_height = qoiDesc.height;
+    m_pixelFormat = ConvertPixelFormat( qoiDesc.channels );
 
-    UINT size = m_width * m_height * GetBytesPerPixel( m_pixelFormat );
-    if ( stream.GetSize( ) < ( offset + size ) ) return false;
-
-    m_bytes.resize( size );
-    if ( !stream.ReadBytes( m_bytes.data( ), size ) ) return false;
+    if (m_pixelFormat == QoiPixelFormat::Unknown) return false;
+    
+    // TODO(nll) use qoiDesc.colorspace
 
     return true;
 }
@@ -100,23 +108,7 @@ bool QoiImage::Save( IStream* pStream ) const
 
     StreamWriter stream( pStream );
 
-    vector<BYTE> id1 = { 'L', 'I', 'S', 'A', '\0' };
-    if ( !stream.WriteBytes( id1 ) ) return false;
-
-    vector<BYTE> id2 = { 0x17, 0x26, 0x71, 0xF7, 0x9E, 0xCC, 0x43, 0x4B, 0xBC, 0x7A, 0x8F, 0x21, 0x5D, 0x77, 0xDE, 0x35 };
-    if ( !stream.WriteBytes( id2 ) ) return false;
-
-    if ( !stream.WriteUInt32( 1 ) ) return false; // Write the version number of the image format specification.
-    if ( !stream.WriteUInt32( m_width ) ) return false;
-    if ( !stream.WriteUInt32( m_height ) ) return false;
-    if ( !stream.WriteUInt32( ConvertPixelFormat( m_pixelFormat ) ) ) return false;
-    if ( !stream.WriteUInt32( 48 ) ) return false; // Offset
-
-    vector<BYTE> empty( 7, 0x00 );
-    if ( !stream.WriteBytes( empty ) ) return false;
-    if ( !stream.WriteBytes( m_bytes ) ) return false;
-
-    return true;
+    return false; // TODO(nll)
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -139,16 +131,27 @@ bool QoiImage::SetImage( const UINT width,
     m_width = width;
     m_height = height;
     m_pixelFormat = pixelFormat;
-    m_bytes = bytes;
+    
+    if (m_bytes != NULL)
+    {
+        free( m_bytes );
+        m_bytes = NULL;
+    }
+    if (!bytes.empty())
+    {
+        m_bytes = malloc( bytes.size() );
+        if (m_bytes == NULL) return false;
+        memcpy( m_bytes, bytes.data(), bytes.size() );
+    }
 
     return true;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void QoiImage::GetBytes( vector<BYTE>& bytes ) const
+void* QoiImage::GetBytes() const
 {
-    bytes = m_bytes;
+    return m_bytes;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -180,16 +183,16 @@ UINT QoiImage::GetBytesPerPixel( const QoiPixelFormat pixelFormat )
     {
         return 0;
     }
-    else if ( pixelFormat == QoiPixelFormat::UInt8 )
-    {
-        return 1;
-    }
     else if ( pixelFormat == QoiPixelFormat::RGB24 )
     {
         return 3;
     }
+    else if ( pixelFormat == QoiPixelFormat::RGBA32 )
+    {
+        return 4;
+    }
 
-    throw invalid_argument( "Unknown QoiPixelFormat" );
+    throw invalid_argument( "Unknown QoiPixelFormat" );         // TODO(nll) remove exceptions
 }
 
 #pragma endregion
@@ -198,13 +201,13 @@ UINT QoiImage::GetBytesPerPixel( const QoiPixelFormat pixelFormat )
 
 QoiPixelFormat QoiImage::ConvertPixelFormat( const UINT value ) const
 {
-    if ( value == 0 )
-    {
-        return QoiPixelFormat::UInt8;
-    }
-    else if ( value == 1 )
+    if ( value == (UINT)QoiPixelFormat::RGB24 )
     {
         return QoiPixelFormat::RGB24;
+    }
+    else if ( value == (UINT)QoiPixelFormat::RGBA32 )
+    {
+        return QoiPixelFormat::RGBA32;
     }
 
     return QoiPixelFormat::Unknown;
@@ -212,13 +215,13 @@ QoiPixelFormat QoiImage::ConvertPixelFormat( const UINT value ) const
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-UINT QoiImage::ConvertPixelFormat( const QoiPixelFormat pixelFormat ) const
+/* TODO(nll) UINT QoiImage::ConvertPixelFormat( const QoiPixelFormat pixelFormat ) const
 {
     if ( pixelFormat == QoiPixelFormat::Unknown )
     {
         throw invalid_argument( "Invalid argument" );
     }
-    else if ( pixelFormat == QoiPixelFormat::UInt8 )
+    else if ( pixelFormat == QoiPixelFormat::RGBA24 )
     {
         return 0;
     }
@@ -229,6 +232,7 @@ UINT QoiImage::ConvertPixelFormat( const QoiPixelFormat pixelFormat ) const
 
     throw invalid_argument( "Unknown QoiPixelFormat" );
 }
+*/
 
 #pragma endregion
 

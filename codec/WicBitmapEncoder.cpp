@@ -47,9 +47,9 @@ WicBitmapEncoder::~WicBitmapEncoder( )
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void WicBitmapEncoder::SetFrame( QoiImage& image )
+void WicBitmapEncoder::SetFrame( QoiImage* image )
 {
-    m_image = image;
+    m_image.reset( image );
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -212,7 +212,12 @@ HRESULT WicBitmapEncoder::Commit( void )
         return WINCODEC_ERR_FRAMEMISSING;
     }
 
-    return m_image.Save( m_pIStream ) ? S_OK : E_FAIL;
+    if ( !m_image )
+    {
+        return WINCODEC_ERR_INTERNALERROR;
+    }
+
+    return m_image->Save( m_pIStream ) ? S_OK : E_FAIL;
 }
 
 #pragma endregion

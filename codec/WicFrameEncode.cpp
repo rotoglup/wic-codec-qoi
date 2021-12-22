@@ -110,13 +110,13 @@ HRESULT WicFrameEncode::SetPixelFormat( WICPixelFormatGUID* pPixelFormat )
         return E_INVALIDARG;
     }
 
-    if ( *pPixelFormat == GUID_WICPixelFormat8bppGray )
-    {
-        m_pixelFormat = QoiPixelFormat::UInt8;
-    }
-    else if ( *pPixelFormat == GUID_WICPixelFormat24bppRGB )
+    if ( *pPixelFormat == GUID_WICPixelFormat24bppRGB )
     {
         m_pixelFormat = QoiPixelFormat::RGB24;
+    }
+    else if ( *pPixelFormat == GUID_WICPixelFormat32bppRGBA )
+    {
+        m_pixelFormat = QoiPixelFormat::RGBA32;
     }
     else
     {
@@ -158,7 +158,8 @@ HRESULT WicFrameEncode::WritePixels( UINT lineCount, UINT cbStride, UINT cbBuffe
         memcpy_s( pBytesDestination, strideDestination, pBytesSource, strideDestination );
     }
 
-    if ( !m_image.SetImage( m_width, m_height, m_pixelFormat, bytes ) )
+    m_image.reset( new QoiImage );
+    if ( !m_image->SetImage( m_width, m_height, m_pixelFormat, bytes ) )
     {
         return E_FAIL;
     }
@@ -195,13 +196,13 @@ HRESULT WicFrameEncode::WriteSource( IWICBitmapSource* pIBitmapSource, WICRect* 
         return WINCODEC_ERR_GENERIC_ERROR;
     }
 
-    if ( pixelFormat == GUID_WICPixelFormat8bppGray )
-    {
-        m_pixelFormat = QoiPixelFormat::UInt8;
-    }
-    else if ( pixelFormat == GUID_WICPixelFormat24bppRGB )
+    if ( pixelFormat == GUID_WICPixelFormat24bppRGB )
     {
         m_pixelFormat = QoiPixelFormat::RGB24;
+    }
+    else if ( pixelFormat == GUID_WICPixelFormat32bppRGBA )
+    {
+        m_pixelFormat = QoiPixelFormat::RGBA32;
     }
     else
     {
@@ -226,7 +227,7 @@ HRESULT WicFrameEncode::WriteSource( IWICBitmapSource* pIBitmapSource, WICRect* 
 
 HRESULT WicFrameEncode::Commit( void )
 {
-    m_pEncoder->SetFrame( m_image );
+    m_pEncoder->SetFrame( m_image.release() );
     return S_OK;
 }
 

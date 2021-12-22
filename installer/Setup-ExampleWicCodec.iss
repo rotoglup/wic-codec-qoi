@@ -1,16 +1,17 @@
 ; This setup script is compiled with Inno Setup Compiler version 5.5.9
 ; See: http://www.jrsoftware.org/
 
-#define AppVersion    "1.0.0"
-#define AppName       "Example WIC Codec"
+#define AppVersion    "0.0.0"
+#define AppName       "Quite OK Image WIC Codec"
 #define AppPublisher  "René Slijkhuis"
-#define FriendlyName  "Lisa"
-#define FileExtension ".lisa"
-#define MimeType      "image/lisa"
-#define DecoderCLSID  "EB68FE9B-B1D7-4E76-8B68-781E5CFB5290"
-#define EncoderCLSID  "79CC92AA-B204-4B11-A341-1617D9CD8A88"
-#define PropertyHandlerCLSID "308BF946-3857-4083-B2B9-3D19093A7EA2"
-#define ContainerFormatCLSID "91DFBD70-3D2C-440F-B297-1E2097D4A833"
+#define FriendlyName  "Quite OK Image"
+#define FileExtension ".qoi"
+#define MimeType      "image/qoi"
+
+#define DecoderCLSID         "A5FEB271-E153-4310-A1CE-50D979463836"
+#define EncoderCLSID         "3A04401D-1273-4560-8CF8-864D881AA5AD"
+#define PropertyHandlerCLSID "60161D61-5E70-4866-AC60-1744C3F8153D"
+#define ContainerFormatCLSID "8320A11E-7046-42FE-9909-A7A2F2103B0B"
 
 [Setup]
 AppName =                           "{#AppName}"

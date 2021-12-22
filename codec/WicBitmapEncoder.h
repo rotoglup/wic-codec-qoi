@@ -44,7 +44,7 @@ public:
     WicBitmapEncoder( );
     virtual ~WicBitmapEncoder( );
 
-    void SetFrame( QoiImage& image );
+    void SetFrame( QoiImage* image );
 
     // IUnknown
     HRESULT STDMETHODCALLTYPE QueryInterface( REFIID riid, void** ppObject );
@@ -69,7 +69,7 @@ private:
     ComPtr<IWICImagingFactory> m_imagingFactory;
     ComPtr<IWICComponentFactory> m_componentFactory;
     ComPtr<WicFrameEncode> m_frame;
-    QoiImage m_image;
+    std::unique_ptr<QoiImage> m_image;
     IStream* m_pIStream;
     CRITICAL_SECTION m_criticalSection;
 };

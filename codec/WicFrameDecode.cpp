@@ -34,12 +34,13 @@ WicFrameDecode::WicFrameDecode( QoiImage* pImage ) :
     m_pImage( pImage ),
     m_width( 0 ),
     m_height( 0 ),
-    m_pixelFormat( QoiPixelFormat::Unknown )
+    m_pixelFormat( QoiPixelFormat::Unknown ),
+    m_imageData( NULL )
 {
     m_width = m_pImage->GetWidth( );
     m_height = m_pImage->GetHeight( );
     m_pixelFormat = m_pImage->GetPixelFormat( );
-    m_pImage->GetBytes( m_imageData );
+    m_imageData = m_pImage->GetBytes();
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -148,13 +149,13 @@ HRESULT WicFrameDecode::GetPixelFormat( WICPixelFormatGUID* pPixelFormat )
         return E_INVALIDARG;
     }
 
-    if ( m_pixelFormat == QoiPixelFormat::UInt8 )
+    if ( m_pixelFormat == QoiPixelFormat::RGB24 )
     {
-        *pPixelFormat = GUID_WICPixelFormat8bppGray;
+        *pPixelFormat = GUID_WICPixelFormat24bppRGB;
     }
     else if ( m_pixelFormat == QoiPixelFormat::RGB24 )
     {
-        *pPixelFormat = GUID_WICPixelFormat24bppRGB;
+        *pPixelFormat = GUID_WICPixelFormat32bppRGBA;
     }
     else
     {
@@ -222,7 +223,7 @@ HRESULT WicFrameDecode::CopyPixels( const WICRect* pRc, UINT stride, UINT buffer
     int i = 0;
     for ( int y = rect.Y ; y < ( rect.Y + rect.Height ) ; y++ )
     {
-        BYTE* pLine = m_imageData.data( ) + ( ( y * strideSrc ) + ( x * bytesPerPixel ) );
+        BYTE* pLine = ((BYTE*)m_imageData) + ( ( y * strideSrc ) + ( x * bytesPerPixel ) );
         memcpy( pBuffer + ( i * stride ), pLine, strideDest );
         i++;
     }

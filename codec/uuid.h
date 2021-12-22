@@ -26,16 +26,16 @@
 
 #pragma once
 
-// Class ID of the decoder class (WicBitmapDecoder) - {EB68FE9B-B1D7-4E76-8B68-781E5CFB5290}
-DEFINE_GUID(CLSID_WicBitmapDecoder, 0xeb68fe9b, 0xb1d7, 0x4e76, 0x8b, 0x68, 0x78, 0x1e, 0x5c, 0xfb, 0x52, 0x90);
+// Class ID of the decoder class (WicBitmapDecoder) - {A5FEB271-E153-4310-A1CE-50D979463836}
+DEFINE_GUID(CLSID_WicBitmapDecoder, 0xa5feb271, 0xe153, 0x4310, 0xa1, 0xce, 0x50, 0xd9, 0x79, 0x46, 0x38, 0x36);
 
-// Class ID of the encoder class (WicBitmapEncoder) - {79CC92AA-B204-4B11-A341-1617D9CD8A88}
-DEFINE_GUID(CLSID_WicBitmapEncoder, 0x79cc92aa, 0xb204, 0x4b11, 0xa3, 0x41, 0x16, 0x17, 0xd9, 0xcd, 0x8a, 0x88);
+// Class ID of the encoder class (WicBitmapEncoder) - {3A04401D-1273-4560-8CF8-864D881AA5AD}
+DEFINE_GUID(CLSID_WicBitmapEncoder, 0x3a04401d, 0x1273, 0x4560, 0x8c, 0xf8, 0x86, 0x4d, 0x88, 0x1a, 0xa5, 0xad);
 
-// Class ID of the IPropertyStore implementation - {308BF946-3857-4083-B2B9-3D19093A7EA2}
-DEFINE_GUID(CLSID_PropertyStore, 0x308bf946, 0x3857, 0x4083, 0xb2, 0xb9, 0x3d, 0x19, 0x09, 0x3a, 0x7e, 0xa2);
+// Class ID of the IPropertyStore implementation - {60161D61-5E70-4866-AC60-1744C3F8153D}
+DEFINE_GUID(CLSID_PropertyStore, 0x60161d61, 0x5e70, 0x4866, 0xac, 0x60, 0x17, 0x44, 0xc3, 0xf8, 0x15, 0x3d);
 
-// GUID of the container format - {91DFBD70-3D2C-440F-B297-1E2097D4A833}
-DEFINE_GUID(GUID_ContainerFormat, 0x91dfbd70, 0x3d2c, 0x440f, 0xb2, 0x97, 0x1e, 0x20, 0x97, 0xd4, 0xa8, 0x33);
+// GUID of the container format - {8320A11E-7046-42FE-9909-A7A2F2103B0B}
+DEFINE_GUID(GUID_ContainerFormat, 0x8320a11e, 0x7046, 0x42fe, 0x99, 0x9, 0xa7, 0xa2, 0xf2, 0x10, 0x3b, 0xb);
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

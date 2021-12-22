@@ -37,8 +37,8 @@
 enum class QoiPixelFormat
 {
     Unknown = 0,
-    UInt8,
-    RGB24
+    RGB24   = 3,
+    RGBA32  = 4
 };
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -57,18 +57,21 @@ public:
                    const QoiPixelFormat pixelFormat,
                    const std::vector<BYTE>& bytes );
 
-    void GetBytes( std::vector<BYTE>& bytes ) const;
+    void* GetBytes( ) const;
     UINT GetWidth( ) const;
     UINT GetHeight( ) const;
     QoiPixelFormat GetPixelFormat( ) const;
     static UINT GetBytesPerPixel( const QoiPixelFormat pixelFormat );
 
 private:
+    QoiImage( const QoiImage& );
+    QoiImage& operator=( const QoiImage& );
+
     QoiPixelFormat ConvertPixelFormat( const UINT value ) const;
     UINT ConvertPixelFormat( const QoiPixelFormat pixelFormat ) const;
 
     UINT m_width;
     UINT m_height;
     QoiPixelFormat m_pixelFormat;
-    std::vector<BYTE> m_bytes;
+    void* m_bytes;
 };

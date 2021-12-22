@@ -66,7 +66,7 @@ public:
 
 private:
     std::unique_ptr<QoiImage> m_pImage;
-    std::vector<BYTE> m_imageData;
+    void* m_imageData;
     UINT m_width;
     UINT m_height;
     QoiPixelFormat m_pixelFormat;
