@@ -31,13 +31,9 @@ ChangesAssociations =               yes
 
 [Files]
 ; x64
-Source: "..\redistributables\x64\msvcp120.dll"; DestDir: "{app}"; Flags: ignoreversion restartreplace uninsrestartdelete
-Source: "..\redistributables\x64\msvcr120.dll"; DestDir: "{app}"; Flags: ignoreversion restartreplace uninsrestartdelete
 Source: "..\codec\bin\x64\Release\WicCodec.dll"; DestDir: "{app}"; Flags: ignoreversion regserver restartreplace uninsrestartdelete
 
 ; x86
-Source: "..\redistributables\x86\msvcp120.dll"; DestDir: "{pf32}\{#AppName}"; Flags: ignoreversion restartreplace uninsrestartdelete
-Source: "..\redistributables\x86\msvcr120.dll"; DestDir: "{pf32}\{#AppName}"; Flags: ignoreversion restartreplace uninsrestartdelete
 Source: "..\codec\bin\Win32\Release\WicCodec.dll"; DestDir: "{pf32}\{#AppName}"; Flags: ignoreversion regserver restartreplace uninsrestartdelete
 
 [Registry]
