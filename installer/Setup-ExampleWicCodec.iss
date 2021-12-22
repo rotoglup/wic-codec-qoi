@@ -14,6 +14,8 @@
 #define PropertyHandlerCLSID "60161D61-5E70-4866-AC60-1744C3F8153D"
 #define ContainerFormatCLSID "8320A11E-7046-42FE-9909-A7A2F2103B0B"
 
+; Remember to change values for '{{{#DecoderCLSID}}\Patterns' to match header bytes
+
 [Setup]
 AppName =                           "{#AppName}"
 AppVerName =                        "{#AppName} {#AppVersion}"
@@ -109,9 +111,9 @@ Root: HKCR; Subkey: "CLSID\{{{#EncoderCLSID}}\InprocServer32"; ValueType: string
 
 Root: HKCR; Subkey: "CLSID\{{{#DecoderCLSID}}\Patterns\0";
 Root: HKCR; Subkey: "CLSID\{{{#DecoderCLSID}}\Patterns\0"; ValueType: dword; ValueName: "Position"; ValueData: "0";
-Root: HKCR; Subkey: "CLSID\{{{#DecoderCLSID}}\Patterns\0"; ValueType: dword; ValueName: "Length"; ValueData: "21";
-Root: HKCR; Subkey: "CLSID\{{{#DecoderCLSID}}\Patterns\0"; ValueType: binary; ValueName: "Pattern"; ValueData: "4C 49 53 41 00 17 26 71 F7 9E CC 43 4B BC 7A 8F 21 5D 77 DE 35";
-Root: HKCR; Subkey: "CLSID\{{{#DecoderCLSID}}\Patterns\0"; ValueType: binary; ValueName: "Mask"; ValueData: "FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF";
+Root: HKCR; Subkey: "CLSID\{{{#DecoderCLSID}}\Patterns\0"; ValueType: dword; ValueName: "Length"; ValueData: "4";
+Root: HKCR; Subkey: "CLSID\{{{#DecoderCLSID}}\Patterns\0"; ValueType: binary; ValueName: "Pattern"; ValueData: "71 6F 69 66";
+Root: HKCR; Subkey: "CLSID\{{{#DecoderCLSID}}\Patterns\0"; ValueType: binary; ValueName: "Mask"; ValueData: "FF FF FF FF";
 
 ; WIC Decoder - x86
 Root: HKCR; Subkey: "Wow6432Node\CLSID\{{7ED96837-96F0-4812-B211-F13C24117ED3}\Instance\{{{#DecoderCLSID}}"; Flags: uninsdeletekey
@@ -173,9 +175,9 @@ Root: HKCR; Subkey: "Wow6432Node\CLSID\{{{#EncoderCLSID}}\InprocServer32"; Value
 
 Root: HKCR; Subkey: "Wow6432Node\CLSID\{{{#DecoderCLSID}}\Patterns\0";
 Root: HKCR; Subkey: "Wow6432Node\CLSID\{{{#DecoderCLSID}}\Patterns\0"; ValueType: dword; ValueName: "Position"; ValueData: "0";
-Root: HKCR; Subkey: "Wow6432Node\CLSID\{{{#DecoderCLSID}}\Patterns\0"; ValueType: dword; ValueName: "Length"; ValueData: "21";
-Root: HKCR; Subkey: "Wow6432Node\CLSID\{{{#DecoderCLSID}}\Patterns\0"; ValueType: binary; ValueName: "Pattern"; ValueData: "4C 49 53 41 00 17 26 71 F7 9E CC 43 4B BC 7A 8F 21 5D 77 DE 35";
-Root: HKCR; Subkey: "Wow6432Node\CLSID\{{{#DecoderCLSID}}\Patterns\0"; ValueType: binary; ValueName: "Mask"; ValueData: "FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF";
+Root: HKCR; Subkey: "Wow6432Node\CLSID\{{{#DecoderCLSID}}\Patterns\0"; ValueType: dword; ValueName: "Length"; ValueData: "4";
+Root: HKCR; Subkey: "Wow6432Node\CLSID\{{{#DecoderCLSID}}\Patterns\0"; ValueType: binary; ValueName: "Pattern"; ValueData: "71 6F 69 66";
+Root: HKCR; Subkey: "Wow6432Node\CLSID\{{{#DecoderCLSID}}\Patterns\0"; ValueType: binary; ValueName: "Mask"; ValueData: "FF FF FF FF";
 
 ; PropertyHandler
 Root: HKCR; Subkey: "CLSID\{{{#PropertyHandlerCLSID}}"; Flags: uninsdeletekey
