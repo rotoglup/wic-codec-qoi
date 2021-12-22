@@ -153,7 +153,7 @@ HRESULT WicFrameDecode::GetPixelFormat( WICPixelFormatGUID* pPixelFormat )
     {
         *pPixelFormat = GUID_WICPixelFormat24bppRGB;
     }
-    else if ( m_pixelFormat == QoiPixelFormat::RGB24 )
+    else if ( m_pixelFormat == QoiPixelFormat::RGBA32 )
     {
         *pPixelFormat = GUID_WICPixelFormat32bppRGBA;
     }
@@ -213,8 +213,7 @@ HRESULT WicFrameDecode::CopyPixels( const WICRect* pRc, UINT stride, UINT buffer
         return WINCODEC_ERR_INSUFFICIENTBUFFER;
     }
 
-    int bytesPerPixel = 1;
-    if ( m_pixelFormat == QoiPixelFormat::RGB24 ) bytesPerPixel = 3;
+    int bytesPerPixel = QoiImage::GetBytesPerPixel( m_pixelFormat );
 
     int x = rect.X;
     int strideSrc  = m_width * bytesPerPixel;

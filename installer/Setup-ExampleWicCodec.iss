@@ -14,7 +14,9 @@
 #define PropertyHandlerCLSID "60161D61-5E70-4866-AC60-1744C3F8153D"
 #define ContainerFormatCLSID "8320A11E-7046-42FE-9909-A7A2F2103B0B"
 
-; Remember to change values for '{{{#DecoderCLSID}}\Patterns' to match header bytes
+; Remember to change :
+; - values for '{{{#DecoderCLSID}}\Patterns' to match header bytes
+; - values for '{{{#DecoderCLSID}}\Formats\' to match supported pixel formats
 
 [Setup]
 AppName =                           "{#AppName}"
@@ -75,7 +77,8 @@ Root: HKCR; Subkey: "CLSID\{{{#DecoderCLSID}}"; ValueType: dword;  ValueName: "S
 ; OLD ; Root: HKCR; Subkey: "CLSID\{{{#DecoderCLSID}}\Formats\{{6FDDC324-4E03-4BFE-B185-3D77768DC908}";
 ; GUID_WICPixelFormat24bppRGB
 Root: HKCR; Subkey: "CLSID\{{{#DecoderCLSID}}\Formats\{{6FDDC324-4E03-4BFE-B185-3D77768DC90D}";
-; GUID_WICPixelFormat32bppRGBA // TODO(nll)
+; GUID_WICPixelFormat32bppRGBA
+Root: HKCR; Subkey: "CLSID\{{{#DecoderCLSID}}\Formats\{{F5C7AD2D-6A8D-43DD-A7A8-A29935261AE9}";
 
 Root: HKCR; Subkey: "CLSID\{{{#DecoderCLSID}}\InprocServer32";
 Root: HKCR; Subkey: "CLSID\{{{#DecoderCLSID}}\InprocServer32"; ValueType: string; ValueName: ""; ValueData: "{app}\WicCodec.dll";
@@ -105,7 +108,8 @@ Root: HKCR; Subkey: "CLSID\{{{#EncoderCLSID}}"; ValueType: dword;  ValueName: "S
 ; OLD ; Root: HKCR; Subkey: "CLSID\{{{#DecoderCLSID}}\Formats\{{6FDDC324-4E03-4BFE-B185-3D77768DC908}";
 ; GUID_WICPixelFormat24bppRGB
 Root: HKCR; Subkey: "CLSID\{{{#DecoderCLSID}}\Formats\{{6FDDC324-4E03-4BFE-B185-3D77768DC90D}";
-; GUID_WICPixelFormat32bppRGBA // TODO(nll)
+; GUID_WICPixelFormat32bppRGBA
+Root: HKCR; Subkey: "CLSID\{{{#DecoderCLSID}}\Formats\{{F5C7AD2D-6A8D-43DD-A7A8-A29935261AE9}";
 
 Root: HKCR; Subkey: "CLSID\{{{#EncoderCLSID}}\InprocServer32";
 Root: HKCR; Subkey: "CLSID\{{{#EncoderCLSID}}\InprocServer32"; ValueType: string; ValueName: ""; ValueData: "{app}\WicCodec.dll";
