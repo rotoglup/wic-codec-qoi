@@ -1,6 +1,13 @@
-MIT License
+-- LICENSE: The MIT License(MIT)
 
-Copyright (c) 2017 RenÃ© Slijkhuis
+Example WIC Codec - Copyright (c) 2017 René Slijkhuis
+- https://github.com/ReneSlijkhuis/example-wic-codec
+
+QOI - The "Quite OK Image" format for fast, lossless image compression - Copyright(c) 2021 Dominic Szablewski
+- https://github.com/phoboslab/qoi
+
+Quite OK Image WIC Code - Copyright (c) 2021 Nicolas Lelong
+- https://nllsoft.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
