@@ -1,30 +1,16 @@
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//
-//    MIT License
-//
-//    Copyright(c) 2017 René Slijkhuis
-//
-//    Permission is hereby granted, free of charge, to any person obtaining a copy
-//    of this software and associated documentation files (the "Software"), to deal
-//    in the Software without restriction, including without limitation the rights
-//    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-//    copies of the Software, and to permit persons to whom the Software is
-//    furnished to do so, subject to the following conditions:
-//
-//    The above copyright notice and this permission notice shall be included in all
-//    copies or substantial portions of the Software.
-//
-//    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-//    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-//    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-//    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-//    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-//    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-//    SOFTWARE.
-//
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/*
+    MIT License
+    Copyright(c) 2021 Nicolas Lelong
+
+    Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+*/
 
 #include <atlbase.h>
+#include <vector>
 
 #include "QoiImage.h"
 #include "StreamReader.h"
@@ -37,8 +23,7 @@
 using namespace std;
 using namespace Wic::ImageFormat::Utilities;
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#pragma region Public methods
+//-----------------------------------------------------------------------
 
 QoiImage::QoiImage( ) :
     m_width( 0 ),
@@ -48,7 +33,7 @@ QoiImage::QoiImage( ) :
 {
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------
 
 QoiImage::~QoiImage( )
 {
@@ -59,7 +44,7 @@ QoiImage::~QoiImage( )
     }
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------
 
 bool QoiImage::Read( IStream* pStream )
 {
@@ -92,7 +77,7 @@ bool QoiImage::Read( IStream* pStream )
     return true;
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------
 
 bool QoiImage::Save( IStream* pStream ) const
 {
@@ -145,19 +130,20 @@ bool QoiImage::Save( IStream* pStream ) const
     return true;
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------
 
-bool QoiImage::SetImage( const UINT width,
-                          const UINT height,
-                          const QoiPixelFormat pixelFormat,
-                          const vector<BYTE>& bytes )
+bool QoiImage::SetImage( const int width,
+                         const int height,
+                         const QoiPixelFormat pixelFormat,
+                         void* bytes,
+                         const int bytesSize )
 {
     if ( ( width == 0 ) || ( height == 0 ) || ( pixelFormat == QoiPixelFormat::Unknown ) )
     {
         return false;
     }
 
-    if ( bytes.size( ) != width * height * GetBytesPerPixel( pixelFormat ) )
+    if ( bytesSize != width * height * GetBytesPerPixel( pixelFormat ) )
     {
         return false;
     }
@@ -171,47 +157,47 @@ bool QoiImage::SetImage( const UINT width,
         free( m_bytes );
         m_bytes = NULL;
     }
-    if (!bytes.empty())
+    if ( bytes != NULL && bytesSize > 0 )
     {
-        m_bytes = malloc( bytes.size() );
+        m_bytes = malloc( bytesSize );
         if (m_bytes == NULL) return false;
-        memcpy( m_bytes, bytes.data(), bytes.size() );
+        memcpy( m_bytes, bytes, bytesSize );
     }
 
     return true;
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------
 
 void* QoiImage::GetBytes() const
 {
     return m_bytes;
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------
 
-UINT QoiImage::GetWidth( ) const
+int QoiImage::GetWidth( ) const
 {
     return m_width;
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------
 
-UINT QoiImage::GetHeight( ) const
+int QoiImage::GetHeight( ) const
 {
     return m_height;
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------
 
 QoiPixelFormat QoiImage::GetPixelFormat( ) const
 {
     return m_pixelFormat;
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------
 
-UINT QoiImage::GetBytesPerPixel( const QoiPixelFormat pixelFormat )
+int QoiImage::GetBytesPerPixel( const QoiPixelFormat pixelFormat )
 {
     if ( pixelFormat == QoiPixelFormat::Unknown )
     {
@@ -229,17 +215,16 @@ UINT QoiImage::GetBytesPerPixel( const QoiPixelFormat pixelFormat )
     return 0;
 }
 
-#pragma endregion
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#pragma region Private methods
+//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 
-QoiPixelFormat QoiImage::ConvertPixelFormat( const UINT value ) const
+QoiPixelFormat QoiImage::ConvertPixelFormat( const int value ) const
 {
-    if ( value == (UINT)QoiPixelFormat::RGB24 )
+    if ( value == (int)QoiPixelFormat::RGB24 )
     {
         return QoiPixelFormat::RGB24;
     }
-    else if ( value == (UINT)QoiPixelFormat::RGBA32 )
+    else if ( value == (int)QoiPixelFormat::RGBA32 )
     {
         return QoiPixelFormat::RGBA32;
     }
@@ -247,8 +232,4 @@ QoiPixelFormat QoiImage::ConvertPixelFormat( const UINT value ) const
     return QoiPixelFormat::Unknown;
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-#pragma endregion
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------

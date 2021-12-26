@@ -26,6 +26,7 @@
 
 #pragma once
 
+#include <memory>
 #include <wincodec.h>
 #include <Wincodecsdk.h>
 

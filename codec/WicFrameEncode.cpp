@@ -150,6 +150,11 @@ HRESULT WicFrameEncode::WritePixels( UINT lineCount, UINT cbStride, UINT cbBuffe
         return E_INVALIDARG;
     }
 
+    if (sizeDestination > INT_MAX)
+    {
+        return WINCODEC_ERR_IMAGESIZEOUTOFRANGE;
+    }
+
     vector<BYTE> bytes( sizeDestination, 0x00 );
     for ( UINT i = 0 ; i < m_height ; i++ )
     {
@@ -159,7 +164,7 @@ HRESULT WicFrameEncode::WritePixels( UINT lineCount, UINT cbStride, UINT cbBuffe
     }
 
     m_image.reset( new QoiImage );
-    if ( !m_image->SetImage( m_width, m_height, m_pixelFormat, bytes ) )
+    if ( !m_image->SetImage( m_width, m_height, m_pixelFormat, bytes.data(), (int)bytes.size() ) )
     {
         return E_FAIL;
     }
@@ -209,23 +214,19 @@ HRESULT WicFrameEncode::WriteSource( IWICBitmapSource* pIBitmapSource, WICRect* 
         return WINCODEC_ERR_UNSUPPORTEDPIXELFORMAT;
     }
 
-    UINT bytesPerPixel = QoiImage::GetBytesPerPixel( m_pixelFormat );
-    if ( bytesPerPixel == 0 )
-    {
-        return WINCODEC_ERR_INTERNALERROR;
-    }
+    int bytesPerPixel = QoiImage::GetBytesPerPixel( m_pixelFormat );
 
     UINT stride = m_width * bytesPerPixel;
     UINT size = m_width * m_height * bytesPerPixel;
 
-    vector<BYTE> bytes( size );
-    hr = pIBitmapSource->CopyPixels( NULL, stride, size, bytes.data( ) );
+    BYTE* bytes = (BYTE*)malloc( size );
+    hr = pIBitmapSource->CopyPixels( NULL, stride, size, bytes );
     if ( FAILED( hr ) )
     {
         return WINCODEC_ERR_GENERIC_ERROR;
     }
 
-    return WritePixels( m_height, stride, size, bytes.data( ) );
+    return WritePixels( m_height, stride, size, bytes );
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
