@@ -30,13 +30,6 @@
 
 using namespace std;
 
-void DEBUG_TRACE(const char *msg)           // WIP(nll)
-{
-    FILE* f = fopen("C:\\temp\\WIC_debug.txt", "a");
-    fprintf(f, msg);
-    fclose(f);
-}
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 WicBitmapDecoder::WicBitmapDecoder( ) :

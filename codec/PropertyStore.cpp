@@ -32,11 +32,10 @@
 #include <propvarutil.h>
 
 #include "main.h"
+#include "utils.h"
 #include "PropertyStore.h"
 
 using namespace std;
-
-extern void DEBUG_TRACE(const char *msg);           // WIP(nll)
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

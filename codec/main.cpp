@@ -41,8 +41,6 @@
 #include "WicBitmapEncoder.h"
 #include "PropertyStore.h"
 
-extern void DEBUG_TRACE(const char *msg);           // WIP(nll)
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Object and server locks counters
