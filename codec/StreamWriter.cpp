@@ -49,11 +49,11 @@ StreamWriter::~StreamWriter( )
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-bool StreamWriter::WriteBytes( const std::vector<BYTE>& bytes ) const
+bool StreamWriter::WriteBytes( const void* bytes, ULONG size ) const
 {
     ULONG written = 0;
-    HRESULT hr = m_pIStream->Write( bytes.data( ), static_cast<ULONG>( bytes.size( ) ), &written );
-    if ( ( hr != S_OK ) || ( written != bytes.size( ) ) )
+    HRESULT hr = m_pIStream->Write( bytes, size, &written );
+    if ( ( hr != S_OK ) || ( written != size ) )
     {
         return false;
     }
@@ -65,14 +65,14 @@ bool StreamWriter::WriteBytes( const std::vector<BYTE>& bytes ) const
 
 bool StreamWriter::WriteUInt32( const UINT32 value ) const
 {
-    vector<BYTE> bytes( 4 );
+    BYTE bytes[4];
 
     bytes[ 0 ] = ( value & 0x000000FF ) >>  0;
     bytes[ 1 ] = ( value & 0x0000FF00 ) >>  8;
     bytes[ 2 ] = ( value & 0x00FF0000 ) >> 16;
     bytes[ 3 ] = ( value & 0xFF000000 ) >> 24;
 
-    return WriteBytes( bytes );
+    return WriteBytes( bytes, sizeof(bytes) );
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

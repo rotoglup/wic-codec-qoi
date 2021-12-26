@@ -221,6 +221,10 @@ HRESULT WicFrameDecode::CopyPixels( const WICRect* pRc, UINT stride, UINT buffer
     }
 
     int bytesPerPixel = QoiImage::GetBytesPerPixel( m_pixelFormat );
+    if ( bytesPerPixel == 0 )
+    {
+        return WINCODEC_ERR_INTERNALERROR;
+    }
 
     int x = rect.X;
     int strideSrc  = m_width * bytesPerPixel;

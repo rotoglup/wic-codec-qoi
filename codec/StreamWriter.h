@@ -27,7 +27,6 @@
 #pragma once
 
 #include <string>
-#include <vector>
 #include <atlbase.h>
 #include <windows.h>
 
@@ -45,7 +44,7 @@ public:
     StreamWriter( IStream* pIStream );
     virtual ~StreamWriter( );
 
-    bool WriteBytes( const std::vector<BYTE>& bytes ) const;
+    bool WriteBytes( const void* bytes, ULONG size ) const;
     bool WriteUInt32( const UINT32 value ) const;
 
 private:

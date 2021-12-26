@@ -101,14 +101,48 @@ bool QoiImage::Save( IStream* pStream ) const
         return false;
     }
 
-    if ( ( m_width == 0 ) || ( m_height == 0 ) || ( m_pixelFormat == QoiPixelFormat::Unknown ) )
+    if ( ( m_width == 0 ) || ( m_height == 0 ) )
+    {
+        return false;
+    }
+
+    qoi_desc qoiDesc;
+    qoiDesc.width = m_width;
+    qoiDesc.height = m_height;
+
+    if (m_pixelFormat == QoiPixelFormat::RGB24)
+    {
+        qoiDesc.channels = 3;
+        qoiDesc.colorspace = QOI_SRGB;          // TODO(nll)
+    }
+    else if (m_pixelFormat == QoiPixelFormat::RGBA32)
+    {
+        qoiDesc.channels = 4;
+        qoiDesc.colorspace = QOI_SRGB;          // TODO(nll)
+    }
+    else
+    {
+        return false;
+    }
+
+    int encodedLen = 0;
+    void* encoded = qoi_encode( m_bytes, &qoiDesc, &encodedLen );
+    if ( encoded == NULL )
     {
         return false;
     }
 
     StreamWriter stream( pStream );
 
-    return false; // TODO(nll)
+    if (!stream.WriteBytes( encoded, encodedLen ))
+    {
+        free( encoded );
+        return false;
+    }
+
+    free( encoded );
+
+    return true;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -192,7 +226,7 @@ UINT QoiImage::GetBytesPerPixel( const QoiPixelFormat pixelFormat )
         return 4;
     }
 
-    throw invalid_argument( "Unknown QoiPixelFormat" );         // TODO(nll) remove exceptions
+    return 0;
 }
 
 #pragma endregion
@@ -214,25 +248,6 @@ QoiPixelFormat QoiImage::ConvertPixelFormat( const UINT value ) const
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-/* TODO(nll) UINT QoiImage::ConvertPixelFormat( const QoiPixelFormat pixelFormat ) const
-{
-    if ( pixelFormat == QoiPixelFormat::Unknown )
-    {
-        throw invalid_argument( "Invalid argument" );
-    }
-    else if ( pixelFormat == QoiPixelFormat::RGBA24 )
-    {
-        return 0;
-    }
-    else if ( pixelFormat == QoiPixelFormat::RGB24 )
-    {
-        return 1;
-    }
-
-    throw invalid_argument( "Unknown QoiPixelFormat" );
-}
-*/
 
 #pragma endregion
 

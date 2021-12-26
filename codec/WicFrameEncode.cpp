@@ -210,6 +210,11 @@ HRESULT WicFrameEncode::WriteSource( IWICBitmapSource* pIBitmapSource, WICRect* 
     }
 
     UINT bytesPerPixel = QoiImage::GetBytesPerPixel( m_pixelFormat );
+    if ( bytesPerPixel == 0 )
+    {
+        return WINCODEC_ERR_INTERNALERROR;
+    }
+
     UINT stride = m_width * bytesPerPixel;
     UINT size = m_width * m_height * bytesPerPixel;
 
