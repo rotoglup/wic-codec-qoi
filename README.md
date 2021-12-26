@@ -4,6 +4,8 @@ This repository contains a *Windows Imaging Component (WIC)* for *Quite OK Image
 
 It allows to integrate QOI files in Windows Photo Gallery and Windows Explorer.
 
+![Windows Explorer qoi logo thumbnail](/doc/explorer_qoi_logo_thumbnail.jpg)
+
 > The Quite OK Image Format for Fast, Lossless Compression. QOI is fast. It losslessy compresses images to a similar size of PNG, while offering 20x-50x faster encoding and 3x-4x faster decoding. 
 
 > The Windows Imaging Component (WIC) provides an extensible framework for working with images and image metadata. WIC makes it possible for independent software vendors (ISVs) and independent hardware vendors (IHVs) to develop their own image codecs and get the same platform support as standard image formats (for example, TIFF, JPEG, PNG, GIF, BMP, and HDPhoto). A single, consistent set of interfaces is used for all image processing, regardless of image format, so any application using the WIC gets automatic support for new image formats as soon as the codec is installed. The extensible metadata framework makes it possible for applications to read and write their own proprietary metadata directly to image files, so the metadata never gets lost or separated from the image.  
