@@ -1,7 +1,7 @@
 ; This setup script is compiled with Inno Setup Compiler version 5.5.9
 ; See: http://www.jrsoftware.org/
 
-#define AppVersion    "0.0.0"
+#define AppVersion    "0.0.1"
 #define AppName       "Quite OK Image WIC Codec"
 #define AppPublisher  "Nicolas Lelong"
 #define FriendlyName  "Quite OK Image"
