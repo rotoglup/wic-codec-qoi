@@ -10,12 +10,17 @@ It allows to integrate QOI files in Windows Photo Gallery and Windows Explorer.
 
 The codec code is directly derived from René Slijkhuis' "Example WIC codec" : https://github.com/ReneSlijkhuis/example-wic-codec.
 
-## Requirements
+## Download
+
+Prebuilt binaries can be downloaded from [Github Releases page](https://github.com/rotoglup/wic-codec-qoi/releases).
+## Build
+
+### Requirements
 * Microsoft Windows 7 or later.
 * Microsoft Visual Studio 2017 or later.
 * [Inno Setup Compiler](http://www.jrsoftware.org/).
 
-## Build instructions
+### Instructions
 * Open a "Developer Command Prompt for VS2017" and change the working directory to the root of this archive.
 * Run "build.bat".
 * You can find the installer in the subdirectory "installer".
