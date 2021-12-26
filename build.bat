@@ -10,5 +10,5 @@ MSBuild WicCodec.sln /t:Rebuild /p:Configuration=Release /p:Platform=x86
 cd ..
 
 cd installer
-"C:\Program Files (x86)\Inno Setup 5\ISCC.exe" Setup-ExampleWicCodec.iss
+"C:\Program Files (x86)\Inno Setup 6\ISCC.exe" Setup-WicCodec.iss
 cd ..
